@@ -1,0 +1,10 @@
+div.detail-form span{
+    display: flex;
+    flex-direction: column;
+}
+
+div.detail-form div > div {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 20px;
+}

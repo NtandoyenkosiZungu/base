@@ -1,5 +1,5 @@
 
-import DetailForm from './components/detailForm'
+import DetailForm from './components/Forms/detailForm'
 import './App.css'
 
 function App() {
