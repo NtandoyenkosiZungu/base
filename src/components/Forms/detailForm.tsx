@@ -1,7 +1,8 @@
 import '../../assets/styles/detail-form.css';
 import { EducationContextProvider } from '../../Contexts/EducationContext';
+import { ExperienceContextProvider } from '../../Contexts/ExperienceContext';
 import { PersonalDetailsContextProvider } from '../../Contexts/PersonalDetailsContext';
-import { EducationDetails, PersonalDetails } from './SubForms';
+import { EducationDetails, PersonalDetails, ExperienceDetails } from './SubForms';
 
 const DetailForm: React.FC = () => {
   return (
@@ -13,6 +14,10 @@ const DetailForm: React.FC = () => {
       <EducationContextProvider>
         <EducationDetails/>
       </EducationContextProvider>
+
+      <ExperienceContextProvider>
+        <ExperienceDetails/>
+      </ExperienceContextProvider>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import { EducationContext } from "../../Contexts/EducationContext";
+import { ExperienceContext } from "../../Contexts/ExperienceContext";
 
 export const PersonalDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -100,5 +101,52 @@ export const EducationDetails: React.FC = () => {
       </div>
     </>
   );
+}
+
+export const ExperienceDetails: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const context = useContext(ExperienceContext);
+
+  if(!context){
+    return null;
+  }
+
+  const {workplace, title, address, phone, startDate, endDate, setWorkplace, setTitle, setAddress,setPhone, setStartDate, setEndDate} = context;
+
+  const toogleDropdown = () =>{
+    setIsOpen(!isOpen);
+  }
+  return (
+    <div className="dropdown">
+      <button onClick={toogleDropdown}>Experience Details</button>
+      <div className={`dropdown-content ${isOpen? 'show': ''}`}>
+        <span>
+          <label htmlFor="workplace">Workplace</label>
+          <input type="text" name="workplace" id="workplace" value={workplace} onChange={e => setWorkplace(e.target.value)}/>
+        </span>
+        <span>
+          <label htmlFor="title">Job Title</label>
+          <input type="text" name="title" id="title" value={title} onChange={e => setTitle(e.target.value)}/>
+        </span>
+        <span>
+          <label htmlFor="address">Address</label>
+          <input type="text" name="address" id="address" value={address} onChange={(e => setTitle(e.target.value))}/>  
+        </span>
+        <span>
+          <label htmlFor="phone">Telephone</label>
+          <input type="text" name="phone" id="phone" value={phone} onChange={(e => setTitle(e.target.value))}/> 
+        </span>
+        <span>
+          <label htmlFor="start-date">Start Date</label>
+          <input type="text" name="start-date" id="start-date" value={startDate} onChange={e => setStartDate(e.target.value)}/>
+        </span>
+        <span>
+          <label htmlFor="end-date">End Date</label>
+          <input type="text" name="end-date" id="end-date" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+        </span>
+      </div>
+    </div>
+  )
 }
 
