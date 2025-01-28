@@ -1,24 +1,20 @@
-import '../../assets/styles/detail-form.css'
+import '../../assets/styles/detail-form.css';
+import { EducationContextProvider } from '../../Contexts/EducationContext';
+import { PersonalDetailsContextProvider } from '../../Contexts/PersonalDetailsContext';
+import { EducationDetails, PersonalDetails } from './SubForms';
 
-const DetailForm : React.FC = () => {
-    return (
-        <>
-            <div className='detail-form'>
-                <div className='personal-info'>
-                    <div>
-                        <span>
-                            <label htmlFor="name">Name</label>
-                            <input type="text" id='name' name='name' />
-                        </span>
-                        <span>
-                            <label htmlFor="surname">Surname</label>
-                            <input type="text" id='surname' name='surname' />
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
+const DetailForm: React.FC = () => {
+  return (
+    <div className="detail-form">
+      <PersonalDetailsContextProvider>
+        <PersonalDetails/>
+      </PersonalDetailsContextProvider>
+
+      <EducationContextProvider>
+        <EducationDetails/>
+      </EducationContextProvider>
+    </div>
+  );
+};
 
 export default DetailForm;

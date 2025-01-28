@@ -1,10 +1,50 @@
-div.detail-form span{
+div.detail-form {
+    padding: 10px;
+    width: 40%;
+    height: 550px;
+    border: 2px solid green;
+    position: fixed;
+    top: 0;
+    margin-top: 5px;
+    overflow: hidden;
+    overflow-y: scroll;
+    
+}
+
+div.dropdown-content {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 4%;
+    overflow: hidden;
+    max-height: 0;
+
+    transition: all 0.3s ease;
+    overflow:auto;
+}
+
+div.detail-form div.dropdown-content.show {
+    max-height: 600px;
+}
+
+
+
+div.dropdown > button {
+    width: 100%;
+    padding: 10px;
+}
+
+div.detail-form span {
     display: flex;
     flex-direction: column;
 }
 
-div.detail-form div > div {
-    display: grid;
-    grid-template-columns: 300px 300px;
-    gap: 20px;
+div.controls {
+    padding: 10px;
+    width: 40%;
+    height: 150px;
+    position: fixed;
+    border: 2px solid green;
+    bottom: 0;
+    margin-bottom: 5px;
 }
