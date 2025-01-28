@@ -131,11 +131,11 @@ export const ExperienceDetails: React.FC = () => {
         </span>
         <span>
           <label htmlFor="address">Address</label>
-          <input type="text" name="address" id="address" value={address} onChange={(e => setTitle(e.target.value))}/>  
+          <input type="text" name="address" id="address" value={address} onChange={(e => setAddress(e.target.value))}/>  
         </span>
         <span>
           <label htmlFor="phone">Telephone</label>
-          <input type="text" name="phone" id="phone" value={phone} onChange={(e => setTitle(e.target.value))}/> 
+          <input type="text" name="phone" id="phone" value={phone} onChange={(e => setPhone(e.target.value))}/> 
         </span>
         <span>
           <label htmlFor="start-date">Start Date</label>
