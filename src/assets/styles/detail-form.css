@@ -1,11 +1,16 @@
-div.detail-form {
+/*
+    INPUT FORM STYLES
+*/
+
+div.input-form {
     padding: 10px;
     width: 40%;
-    height: 550px;
+    height: 85%;
     border: 2px solid green;
+    background-color: #FFFBFC;
     position: fixed;
     top: 0;
-    margin-top: 5px;
+    margin-top: 5%;
     overflow: hidden;
     overflow-y: scroll;
     
@@ -23,7 +28,7 @@ div.dropdown-content {
     overflow:auto;
 }
 
-div.detail-form div.dropdown-content.show {
+div.input-form div.dropdown-content.show {
     max-height: 600px;
 }
 
@@ -34,17 +39,30 @@ div.dropdown > button {
     padding: 10px;
 }
 
-div.detail-form span {
+div.input-form span {
     display: flex;
     flex-direction: column;
 }
 
-div.controls {
+
+/* 
+    OUTPUT FORM STYLES
+*/
+
+div.output-form {
     padding: 10px;
-    width: 40%;
-    height: 150px;
+    width: 45%;
+    height: 85%;
+    border: 2px solid blue;
+    background-color: gray;
     position: fixed;
-    border: 2px solid green;
-    bottom: 0;
-    margin-bottom: 5px;
+    top: 0;
+    margin-top: 5%;
+    margin-left: 50%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+div.resume {
+    background-color: #FFFBFC;
 }

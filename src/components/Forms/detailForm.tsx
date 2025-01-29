@@ -8,16 +8,24 @@ const DetailForm: React.FC = () => {
   return (
     <div className="detail-form">
       <PersonalDetailsContextProvider>
-        <PersonalDetails/>
+        <EducationContextProvider>
+          <ExperienceContextProvider>
+
+            <div className='input-form'>
+              <PersonalDetails />
+              <EducationDetails />
+              <ExperienceDetails />
+            </div>
+
+            <div className='output-form'>
+              <div className="resume">
+                
+              </div>
+            </div>
+
+          </ExperienceContextProvider>
+        </EducationContextProvider>
       </PersonalDetailsContextProvider>
-
-      <EducationContextProvider>
-        <EducationDetails/>
-      </EducationContextProvider>
-
-      <ExperienceContextProvider>
-        <ExperienceDetails/>
-      </ExperienceContextProvider>
     </div>
   );
 };

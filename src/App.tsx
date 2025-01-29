@@ -1,11 +1,11 @@
 
-import DetailForm from './components/Forms/detailForm'
+import Home from './components/Home/Home'
 import './App.css'
 
 function App() {
   return (
     <>
-        <DetailForm />
+        <Home />
     </>
   )
 }

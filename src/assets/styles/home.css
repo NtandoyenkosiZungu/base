@@ -1,0 +1,12 @@
+div.banner {
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    height: 9%;
+    width: 100%;
+    border-bottom:2px solid white;
+
+    overflow: hidden;
+    z-index: 999;
+}
