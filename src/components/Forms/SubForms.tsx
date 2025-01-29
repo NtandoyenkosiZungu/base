@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
-import { EducationContext } from "../../Contexts/EducationContext";
+import { EducationContext} from "../../Contexts/EducationContext";
 import { ExperienceContext } from "../../Contexts/ExperienceContext";
 
 export const PersonalDetails: React.FC = () => {
@@ -57,6 +57,7 @@ export const PersonalDetails: React.FC = () => {
 export const EducationDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  //RETRIEVING THE STATE OF EducationDetails through the Context API
   const context = useContext(EducationContext);
   if (!context){
     return null;

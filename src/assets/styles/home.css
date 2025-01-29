@@ -5,7 +5,7 @@ div.banner {
     top: 0;
     height: 9%;
     width: 100%;
-    border-bottom:2px solid white;
+    border-bottom:2px solid #FFFBFC;;
 
     overflow: hidden;
     z-index: 999;

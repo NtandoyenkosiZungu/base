@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, Children } from "react";
 
 interface EducationContextType {
     institution: string;
@@ -16,7 +16,7 @@ interface EducationContextType {
     setEndDate : (endDate: string) => void;
 }
 
-export const EducationContext = createContext<EducationContextType | undefined>(undefined);
+export const EducationContext = createContext< EducationContextType | undefined>(undefined);
 
 interface EducationContextProviderProps {
     children: ReactNode;
@@ -45,10 +45,47 @@ export function EducationContextProvider({children}: EducationContextProviderPro
         setStartDate,
         setEndDate
     }
-
     return (
         <EducationContext.Provider value={contextValue}>
             {children}
         </EducationContext.Provider>
     )
+}
+
+export const EducationFunctionContext = createContext< any| undefined>(undefined);
+
+export function EducationFunctionContextProvider({children}: EducationContextProviderProps){
+    const [institution, setInstitution] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
+    const [level, setLevel] = useState<string>("");
+    const [field, setField] = useState<string>("");
+    const [startDate, setStartDate] = useState<string>("");
+    const [endDate, setEndDate] = useState<string>("");
+
+    const contextFuncion = () => {
+        const contextData: EducationContextType = {
+            institution,
+            location,
+            level,
+            field,
+            startDate,
+            endDate,
+    
+            setInstitution,
+            setLocation,
+            setLevel,
+            setField,
+            setStartDate,
+            setEndDate
+        }
+
+        return contextData;
+    }
+
+    return (
+        <EducationFunctionContext.Provider value={contextFuncion}>
+            {children}
+        </EducationFunctionContext.Provider>
+    )
+
 }
