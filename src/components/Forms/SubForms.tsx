@@ -1,7 +1,49 @@
 import { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
-import { EducationContext} from "../../Contexts/EducationContext";
+import {EducationFunctionContext} from "../../Contexts/ValueContexts";
 import { ExperienceContext } from "../../Contexts/ExperienceContext";
+import { Education } from "./SubFormComponents";
+
+
+export const EducationDetails: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // Retrieve the education functions context
+  const func_context = useContext(EducationFunctionContext);
+
+  if (!func_context) return null;
+
+  const { educationEntries, updateEducationEntry, removeEducationEntry, addEducationEntry } = func_context;
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="dropdown">
+      <button onClick={toggleDropdown}>Education Details</button>
+      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px" }}>
+        {educationEntries.map((entry, index) => (
+          <Education
+            key={index}
+            index={index}  // Pass index to handle updates
+            institution={entry.institution}
+            location={entry.location}
+            level={entry.level}
+            field={entry.field}
+            start_date={entry.start_date}
+            end_date={entry.end_date}
+            updateEducationEntry={updateEducationEntry}  // Pass function to handle updates
+            removeEducationEntry={removeEducationEntry}  // Pass function to handle deletion
+          />
+        ))}
+        <button style={{ width: "95%" }} onClick={addEducationEntry}>
+          Add Entry
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export const PersonalDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -53,57 +95,6 @@ export const PersonalDetails: React.FC = () => {
     </>
   );
 }
-
-export const EducationDetails: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  //RETRIEVING THE STATE OF EducationDetails through the Context API
-  const context = useContext(EducationContext);
-  if (!context){
-    return null;
-  }
-
-  const {institution, setInstitution, location, setLocation, level, setLevel, field, setField, startDate, setStartDate, endDate, setEndDate} = context;
-
-  const toogleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <>
-      <div className="dropdown">
-        <button onClick={toogleDropdown}>Education Details</button>
-        <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
-          <span>
-            <label htmlFor="institution">Institution</label>
-            <input type="text" name="institution" id="institution" value={institution} onChange={e => setInstitution(e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="location">Location</label>
-            <input type="text" name="location" id="location" value={location} onChange={e => setLocation(e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="level">Level</label>
-            <input type="text" name="level" id="level"  value={level} onChange={e => setLevel(e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="study">Field Of Study</label>
-            <input type="text" name="study" id="study" value={field}  onChange={e => setField(e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="start-date">Start Date</label>
-            <input type="text" name="start-date" id="start-date" value={startDate} onChange={e => setStartDate(e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="end-date">End Date</label>
-            <input type="text" name="end-date" id="end-date" value={endDate} onChange={e => setEndDate(e.target.value)}/>
-          </span>
-        </div>
-      </div>
-    </>
-  );
-}
-
 export const ExperienceDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 

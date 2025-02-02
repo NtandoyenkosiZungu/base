@@ -2,7 +2,7 @@ import '../../assets/template-styles/template-one.css'
 
 import { useContext } from 'react'
 import { PersonalDetailsContext } from '../../Contexts/PersonalDetailsContext';
-import { EducationContext } from '../../Contexts/EducationContext';
+import { EducationFunctionContext } from '../../Contexts/ValueContexts';
 
 export const TemplateOne: React.FC = () => {
 
@@ -11,18 +11,11 @@ export const TemplateOne: React.FC = () => {
     if (!personalContext) return null;
     const {name, surname, address, phone, email} = personalContext;
 
-    const  educationContext= useContext(EducationContext);
+    const  educationContext= useContext(EducationFunctionContext);
     
     if (!educationContext) return null;
-    const {institution, level, location, field, startDate, endDate} = educationContext;
- 
-    //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
-    let duration = "Duration"
-    if (endDate != 'Present') {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-5);
-    } else {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-4);
-    }
+    const {educationEntries} = educationContext;
+
     return (
         <div className='res-one'>
             <div className="res-one-details">
@@ -40,19 +33,21 @@ export const TemplateOne: React.FC = () => {
             </div>
             <hr />
             <div className="res-one-education">
-                <div className="heading">
-                    EDUCATION
-                </div>
-                <div className='res-content'>
-                    <span className='left-side'>
-                        <p>{institution}</p>
-                        <p className='last-child'>{level + ' ' + field}</p>
-                    </span>
-                    <span className='right-side'>
-                        <p>{location}</p>
-                        <p className='last-child'>{duration}</p>
-                    </span>
-                </div>
+            <div className="heading">
+                EDUCATION
+            </div>
+                {educationEntries.map((entry, index) => (
+                    <TemplateOneEducationDetails 
+                        key={index}
+                        institution={entry.institution}
+                        level={entry.level}
+                        field={entry.field}
+                        location={entry.location}
+                        startDate={entry.start_date}
+                        endDate={entry.end_date}
+
+                    />
+                ))}
             </div>
             <hr />
             <div className="res-one-achievements">
@@ -109,5 +104,39 @@ export const TemplateOne: React.FC = () => {
                 </div>
             </div>
         </div>
+    )
+}
+
+
+interface educationprops{
+    institution: string,
+    location: string,
+    level: string,
+    field: string,
+    startDate: string,
+    endDate: string
+}
+
+const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, location, level, field, startDate, endDate}) => {
+    //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
+    let duration = "Duration"
+    if (endDate != 'Present') {
+        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-5);
+    } else {
+        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-4);
+    }
+    return (
+        <>
+            <div className='res-content'>
+                <span className='left-side'>
+                    <p>{institution}</p>
+                    <p className='last-child'>{level + ' ' + field}</p>
+                </span>
+                <span className='right-side'>
+                    <p>{location}</p>
+                    <p className='last-child'>{duration}</p>
+                </span>
+            </div>
+        </>
     )
 }
