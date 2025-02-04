@@ -1,54 +1,62 @@
 import { createContext, useState, ReactNode } from "react";
 
-interface ExperienceContextType {
-    workplace: string;
-    title: string;
-    address : string;
-    phone : string;
-    startDate: string
-    endDate: string
 
-    setWorkplace: (workplace: string) =>void;
-    setTitle: (title: string) =>void;
-    setAddress: (address: string) =>void;
-    setPhone: (phone: string) =>void;
-    setStartDate: (startDate: string) =>void;
-    setEndDate: (endDate: string) =>void
-}
-
-export const ExperienceContext = createContext<ExperienceContextType | undefined>(undefined);
-
-interface ExperienceContextProviderProps {
+interface childProp {
     children: ReactNode;
 }
 
-export function ExperienceContextProvider({children}: ExperienceContextProviderProps){
-    const [workplace, setWorkplace] = useState<string>("");
-    const [title, setTitle] = useState<string>("");
-    const [address, setAddress] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
-    const [startDate, setStartDate] = useState<string>("");
-    const [endDate, setEndDate] = useState<string>("");
+export interface ExperienceEntry {
+    workplace: string;
+    role: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+}
 
-    const contextValue = {
-        workplace,
-        title,
-        address,
-        phone,
-        startDate,
-        endDate,
+interface experienceContextProps {
+    experienceEntries: ExperienceEntry[];
+    addExperienceEntry: () => void;
+    updateExperienceEntry: (index: number, field: keyof ExperienceEntry, value: string) => void;
+    removeExperienceEntry: (index: number) => void;
+}
 
-        setWorkplace,
-        setTitle,
-        setAddress,
-        setPhone,
-        setStartDate,
-        setEndDate,
-    }
+export const ExperienceContext = createContext< experienceContextProps | undefined>(undefined);
+
+export function ExperienceContextProvider({ children }: childProp) {
+
+    const [experienceEntries, setExperienceEntries] = useState<ExperienceEntry[]>([]);
+
+    const addExperienceEntry = () => {
+        setExperienceEntries([
+            ...experienceEntries,
+            {
+                workplace: '',
+                role: '',
+                startDate: '',
+                endDate: '',
+                description: '',
+            },
+        ]);
+    };
+
+    const updateExperienceEntry = (
+        index: number,
+        field: keyof ExperienceEntry,
+        value: string
+    ) => {
+        const updatedEntries = experienceEntries.map((entry, i) => i === index ? { ...entry, [field]: value } : entry
+        );
+        setExperienceEntries(updatedEntries);
+    };
+
+    const removeExperienceEntry = (index: number) => {
+        const updatedEntries = experienceEntries.filter((_, i) => i !== index);
+        setExperienceEntries(updatedEntries);
+    };
 
     return (
-        <ExperienceContext.Provider value={contextValue} >
+        <ExperienceContext.Provider value={{ experienceEntries, addExperienceEntry, updateExperienceEntry, removeExperienceEntry }}>
             {children}
         </ExperienceContext.Provider>
-    )
+    );
 }

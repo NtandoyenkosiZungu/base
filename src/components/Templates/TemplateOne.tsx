@@ -2,7 +2,7 @@ import '../../assets/template-styles/template-one.css'
 
 import { useContext } from 'react'
 import { PersonalDetailsContext } from '../../Contexts/PersonalDetailsContext';
-import { EducationFunctionContext } from '../../Contexts/ValueContexts';
+import { EducationFunctionContext } from '../../Contexts/EducationContext';
 
 export const TemplateOne: React.FC = () => {
 

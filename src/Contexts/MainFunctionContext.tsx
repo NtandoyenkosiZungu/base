@@ -1,6 +1,7 @@
 import {createContext, ReactNode } from "react";
-import {EducationFunctionContextProvider } from "./ValueContexts";
+import {EducationFunctionContextProvider } from "./EducationContext";
 import { PersonalDetailsContextProvider } from "./PersonalDetailsContext";
+import { ExperienceContextProvider } from "./ExperienceContext";
 
 
 const MainContext = createContext<any | undefined>(undefined);
@@ -14,7 +15,9 @@ export function MainContextProvider({children}: MainProps){
         <MainContext.Provider value={{}}>
             <PersonalDetailsContextProvider>
                 <EducationFunctionContextProvider>
-                {children}
+                    <ExperienceContextProvider>
+                        {children}
+                    </ExperienceContextProvider>
                 </EducationFunctionContextProvider>
             </PersonalDetailsContextProvider>
         </MainContext.Provider>

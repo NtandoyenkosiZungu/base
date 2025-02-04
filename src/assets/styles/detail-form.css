@@ -13,6 +13,10 @@ div.input-form {
     margin-top: 5%;
     overflow: hidden;
     overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     
 }
 
@@ -24,12 +28,12 @@ div.dropdown-content {
     overflow: hidden;
     max-height: 0;
 
-    transition: all 0.3s ease;
+    transition: all 0.6s ease;
     overflow:auto;
 }
 
 div.input-form div.dropdown-content.show {
-    max-height: 600px;
+    max-height: 270px;
 }
 
 
@@ -37,6 +41,37 @@ div.input-form div.dropdown-content.show {
 div.dropdown > button {
     width: 100%;
     padding: 10px;
+}
+
+button.add-entry {
+    height: 10px;
+}
+
+div.btn-container {
+    width: 100%;
+    padding: 10px;
+    
+    display: grid;
+    grid-template-columns: 80% 20%;
+    margin-left: -2%;
+}
+
+div.btn-container > button {
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+}
+
+div.btn-container > button.btn-delete{
+    background-color: red;
+    border: 3px solid blueviolet;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
 }
 
 div.input-form span {
