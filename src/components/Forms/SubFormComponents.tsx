@@ -76,7 +76,7 @@ interface experienceProps {
   removeExperience: (index: number)=> void;
 }
 
-export const Experience : React.FC<experienceProps> =({workplace, role, startDate, endDate, description, index, updateExperience, removeExperience}) => {
+export const Experience : React.FC<experienceProps> =({workplace, role, startDate, endDate, index, updateExperience, removeExperience}) => {
   const [isOpen, setIsOpen] = useState<boolean>();
 
   return (
@@ -143,8 +143,16 @@ export const Project : React.FC<ProjectProps> = ({project, link, tools, descript
           </span>
           <span>
             <label htmlFor="project-link">Project Link</label>
-            <input type="text" name="project-link" id="project-link" value={project} onChange={(e)=> updateProjectEntry(index, 'link', e.target.value)}/>
+            <input type="text" name="project-link" id="project-link" value={link} onChange={(e)=> updateProjectEntry(index, 'link', e.target.value)}/>
           </span>
+        </span>
+        <span>
+          <label htmlFor="project-tools">Tools Used</label>
+          <input type="text" name="project-tools" id="project-tools" value={tools} onChange={(e)=> updateProjectEntry(index, 'tools', e.target.value)}/>
+        </span>
+        <span>
+          <label htmlFor="project-description">Project Description</label>
+          <textarea name="project-description" id="project-description" value={description} onChange={(e)=> updateProjectEntry(index, 'description', e.target.value)}/>
         </span>
         <button onClick={()=> setIsOpen(false)}>
           Close
