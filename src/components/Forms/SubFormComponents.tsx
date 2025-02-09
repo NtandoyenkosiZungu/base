@@ -2,6 +2,63 @@ import {useState } from "react";
 import { EducationEntry } from "../../Contexts/EducationContext";
 import { ExperienceEntry } from "../../Contexts/ExperienceContext";
 import { ProjectEntry } from "../../Contexts/ProjectContext";
+import {ReferenceEntry } from "../../Contexts/ReferenceContext";
+
+
+
+
+interface DropdownProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+export const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="dropdown">
+      <button onClick={toggleDropdown}>{title}</button>
+      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+interface DropdownContentProps {
+  title: string;
+  index: number;
+  removeEntry: (index: number)=> void
+  children: React.ReactNode;
+
+}
+
+const DropdownContent: React.FC<DropdownContentProps> = ({ title, children, index, removeEntry }) =>{
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="dropdown" style={{alignSelf: 'center'}}>
+      <div className="btn-container">
+        <button onClick={toggleDropdown}>{title}</button>
+        <button className="btn-delete" onClick={()=>{ if (window.confirm("Are you sure you want to remove this entry?")) removeEntry(index) }} >
+          Delete
+        </button>
+      </div>
+      <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 
 interface educationProps {
   institution: string;
@@ -17,20 +74,8 @@ interface educationProps {
 }
 
 export const Education: React.FC<educationProps> = ({institution, location, level, field, start_date, end_date, index, updateEducationEntry, removeEducationEntry}) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
   return (
-
-    <div className="dropdown" style={{width:'95%'}}>
-      <div className="btn-container">
-        <button onClick={()=> setIsOpen(!isOpen)}>
-          {institution.length > 0 ? institution: 'Institution Name'}
-        </button>
-        <button className="btn-delete" onClick={()=> removeEducationEntry(index)}>
-          Remove
-        </button>
-      </div>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{display:'grid', gridTemplateColumns: '45% 45%', gap: '10%', height: '200%'}}>
+      <DropdownContent title={institution.length > 0 ? institution : 'Institution'} index={index} removeEntry={removeEducationEntry}>
         <span>
           <label htmlFor="institution">Institution</label>
           <input type="text" name="institution" id="institution"  value={institution} onChange={(e)=> updateEducationEntry(index, 'institution', e.target.value)}/>
@@ -55,14 +100,9 @@ export const Education: React.FC<educationProps> = ({institution, location, leve
           <label htmlFor="end-date">End Date</label>
           <input type="text" name="end-date" id="end-date" value={end_date} onChange={(e)=> updateEducationEntry(index, 'end_date', e.target.value)}/>
         </span>
-        <button onClick={()=> setIsOpen(false)}>
-          Close
-        </button>
-      </div>
-    </div>
+      </DropdownContent>
   );
 };
-
 
 interface experienceProps {
   workplace: string;
@@ -77,44 +117,32 @@ interface experienceProps {
 }
 
 export const Experience : React.FC<experienceProps> =({workplace, role, startDate, endDate, index, updateExperience, removeExperience}) => {
-  const [isOpen, setIsOpen] = useState<boolean>();
-
   return (
-    <div className="dropdown" style={{width: '95%'}}>
-      <div className="btn-container">
-        <button onClick={()=> setIsOpen(!isOpen)}>{workplace.length > 0 ? workplace: 'Workplace'}</button>
-        <button className="btn-delete" onClick={()=> removeExperience(index)}>Delete</button>
-      </div>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{display:'grid', gridTemplateColumns: '45% 45%', gap: '10%', height: '200%'}}>
-          <span>
-            <label htmlFor="workplace">Workplace</label>
-            <input type="text" name="workplace" id="workplace" value={workplace} onChange={(e)=> updateExperience(index, 'workplace', e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="role">Role</label>
-            <input type="text" name="role" id="role" value={role} onChange={(e)=> updateExperience(index, 'role', e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="start-date">Start Date</label>
-            <input type="text" name="start-date" id="start-date" value={startDate} onChange={(e)=> updateExperience(index, 'startDate', e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="end-date">End Date</label>
-            <input type="text" name="end-date" id="end-date" value={endDate} onChange={(e)=> updateExperience(index, 'endDate', e.target.value)}/>
-          </span>
-          <button onClick={()=> setIsOpen(false)}>
-            Close
-          </button>
-      </div>
-      
-    </div>
+    <DropdownContent title={workplace.length > 0? workplace : 'Company'} index={index} removeEntry={removeExperience}>
+      <span>
+        <label htmlFor="workplace">Workplace</label>
+        <input type="text" name="workplace" id="workplace" value={workplace} onChange={(e)=> updateExperience(index, 'workplace', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="role">Role</label>
+        <input type="text" name="role" id="role" value={role} onChange={(e)=> updateExperience(index, 'role', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="start-date">Start Date</label>
+        <input type="text" name="start-date" id="start-date" value={startDate} onChange={(e)=> updateExperience(index, 'startDate', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="end-date">End Date</label>
+        <input type="text" name="end-date" id="end-date" value={endDate} onChange={(e)=> updateExperience(index, 'endDate', e.target.value)}/>
+      </span>
+    </DropdownContent>
   )
 }
 
 interface ProjectProps {
   project: string;
   link: string;
-  tools: string;
+  tools: string[];
   description: string;
   index: number;
 
@@ -123,41 +151,65 @@ interface ProjectProps {
 }
 
 export const Project : React.FC<ProjectProps> = ({project, link, tools, description, index, updateProjectEntry, removeProjectEntry}) => {
-  const [isOpen, setIsOpen] = useState<boolean>();
-
   return (
-    <div className="dropdown">
-      <div className="btn-container">
-        <button onClick={()=> setIsOpen(!isOpen)}>{
-          project.length > 0 ? project : 'Project Name'}
-        </button>
-        <button onClick={()=> removeProjectEntry}>
-          Remove Entry
-        </button>
-      </div>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{display:'grid', gridTemplateColumns: '45% 45%', gap: '10%', height: '200%'}}>
-        <span>
-          <span>
-            <label htmlFor="project-name">Project Name</label>
-            <input type="text" name="project-name" id="project-name" value={project} onChange={(e)=> updateProjectEntry(index, 'project', e.target.value)}/>
-          </span>
-          <span>
-            <label htmlFor="project-link">Project Link</label>
-            <input type="text" name="project-link" id="project-link" value={link} onChange={(e)=> updateProjectEntry(index, 'link', e.target.value)}/>
-          </span>
-        </span>
-        <span>
-          <label htmlFor="project-tools">Tools Used</label>
-          <input type="text" name="project-tools" id="project-tools" value={tools} onChange={(e)=> updateProjectEntry(index, 'tools', e.target.value)}/>
-        </span>
-        <span>
-          <label htmlFor="project-description">Project Description</label>
-          <textarea name="project-description" id="project-description" value={description} onChange={(e)=> updateProjectEntry(index, 'description', e.target.value)}/>
-        </span>
-        <button onClick={()=> setIsOpen(false)}>
-          Close
-        </button>
-      </div>
-    </div>
+    <DropdownContent title={project.length > 0? project : 'Project Name'} index={index} removeEntry={removeProjectEntry}>
+      <span>
+        <label htmlFor="project-name">Project Name</label>
+        <input type="text" name="project-name" id="project-name" value={project} onChange={(e)=> updateProjectEntry(index, 'project', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="project-link">Project Link</label>
+        <input type="text" name="project-link" id="project-link" value={link} onChange={(e)=> updateProjectEntry(index, 'link', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="project-tools">Tools Used</label>
+        <input type="text" name="project-tools" id="project-tools" value={tools} onChange={(e)=> updateProjectEntry(index, 'tools', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="project-description">Project Description</label>
+        <textarea name="project-description" id="project-description" value={description} onChange={(e)=> updateProjectEntry(index, 'description', e.target.value)}/>
+      </span>
+    </DropdownContent>
+  )
+}
+
+
+interface ReferenceProps {
+  reference: string;
+  role: string;
+  workplace: string;
+  email: string;
+  phone: string;
+  index: number;
+
+  updateReferenceEntry: (index : number, field: keyof ReferenceEntry, value: string) => void;
+  removeReferenceEntry: (index : number) => void;
+}
+
+export const References : React.FC<ReferenceProps> = ({reference, role, workplace, email, phone, index, updateReferenceEntry, removeReferenceEntry}) => {
+ 
+  return (
+    <DropdownContent title={reference.length > 0? reference : 'Reference Name'} index={index} removeEntry={removeReferenceEntry}>
+      <span>
+        <label htmlFor="reference-name">Reference Name</label>
+        <input type="text" name="reference-name" id="reference-name" value={reference} onChange={(e)=> updateReferenceEntry(index,'reference', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="reference-role">Role</label>
+        <input type="text" name="reference-role" id="reference-role" value={role} onChange={(e)=> updateReferenceEntry(index, 'role', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="reference-workplace">Workplace</label>
+        <input type="text" name="reference-workplace" id="reference-workplace" value={workplace} onChange={(e)=> updateReferenceEntry(index, 'workplace', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="reference-email">Email</label>
+        <input type="text" name="reference-email" id="reference-email" value={email} onChange={(e)=> updateReferenceEntry(index, 'email', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="reference-phone">Phone</label>
+        <input type="text" name="reference-phone" id="reference-phone" value={phone} onChange={(e)=> updateReferenceEntry(index, 'phone', e.target.value)}/>
+      </span>
+    </DropdownContent>
   )
 }

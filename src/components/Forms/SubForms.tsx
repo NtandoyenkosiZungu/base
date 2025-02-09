@@ -2,11 +2,12 @@ import { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import {EducationFunctionContext} from "../../Contexts/EducationContext";
 import { ExperienceContext } from "../../Contexts/ExperienceContext";
-import { Education, Experience } from "./SubFormComponents";
+import { Education, Experience, Project, References, Dropdown } from "./SubFormComponents";
+import { ProjectContext } from "../../Contexts/ProjectContext";
+import { ReferenceContext } from "../../Contexts/ReferenceContext";
 
 
 export const EducationDetails: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // Retrieve the education functions context
   const func_context = useContext(EducationFunctionContext);
@@ -15,33 +16,26 @@ export const EducationDetails: React.FC = () => {
 
   const { educationEntries, updateEducationEntry, removeEducationEntry, addEducationEntry } = func_context;
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <div className="dropdown">
-      <button onClick={toggleDropdown}>Education Details</button>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px" }}>
-        {educationEntries.map((entry, index) => (
-          <Education
-            key={index}
-            index={index}  // Pass index to handle updates
-            institution={entry.institution}
-            location={entry.location}
-            level={entry.level}
-            field={entry.field}
-            start_date={entry.start_date}
-            end_date={entry.end_date}
-            updateEducationEntry={updateEducationEntry}  // Pass function to handle updates
-            removeEducationEntry={removeEducationEntry}  // Pass function to handle deletion
-          />
-        ))}
-        <button className="add-enty" style={{ width: "95%" }} onClick={addEducationEntry}>
-          Add Entry
-        </button>
-      </div>
-    </div>
+    <Dropdown title="Education Details">
+        {
+          educationEntries.map((entry, index) => (
+            <Education
+              key={index}
+              institution={entry.institution}
+              location={entry.location}
+              level={entry.level}
+              field={entry.field}
+              start_date={entry.start_date}
+              end_date={entry.end_date}
+              index={index}
+              updateEducationEntry={updateEducationEntry}
+              removeEducationEntry={removeEducationEntry}
+            />
+          ))
+        }
+        <button className="btn-add-entry" onClick={addEducationEntry}>Add Education Entry</button>
+    </Dropdown>
   );
 };
 export const PersonalDetails: React.FC = () => {
@@ -63,7 +57,7 @@ export const PersonalDetails: React.FC = () => {
   return (
     <>
       <div className="dropdown">
-        <button onClick={toogleDropdown}>Personal Details</button>
+        <button className="btn-add-entry" onClick={toogleDropdown}>Personal Details</button>
         <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
           <span>
             <label htmlFor="name">Name</label>
@@ -95,8 +89,6 @@ export const PersonalDetails: React.FC = () => {
   );
 }
 export const ExperienceDetails: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const context = useContext(ExperienceContext);
 
   if(!context){
@@ -106,34 +98,81 @@ export const ExperienceDetails: React.FC = () => {
 
   const {experienceEntries, updateExperienceEntry, removeExperienceEntry, addExperienceEntry} = context;
 
-  const toogleDropdown = () =>{
-    setIsOpen(!isOpen);
-  }
   return (
-    <div className="dropdown">
-      <button onClick={toogleDropdown}>Experience Details</button>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px" }}>
-        {
-          experienceEntries.map((entry, index)=> 
-            <Experience 
-              key={index}
-              index={index}
-              workplace={entry.workplace}
-              role={entry.role}
-              startDate={entry.role}
-              endDate={entry.endDate}
-              description={entry.description}
-
-              removeExperience={removeExperienceEntry}
-              updateExperience={updateExperienceEntry}
-            />
-          )
-        }
-        <button className="add-enty" onClick={addExperienceEntry} style={{width: '95%'}}>
-          Add Entry
-        </button>
-      </div>
-    </div>
+    <Dropdown title="Experience Details">
+      {
+        experienceEntries.map((entry, index)=> 
+          <Experience
+            key={index}
+            index={index}
+            workplace={entry.workplace}
+            role={entry.role}
+            startDate={entry.startDate}
+            endDate={entry.endDate}
+            description={entry.description}
+            updateExperience={updateExperienceEntry}
+            removeExperience={removeExperienceEntry}
+          />
+        )
+      }
+      <button className="btn-add-entry" onClick={addExperienceEntry}>Add Experience Entry</button>
+    </Dropdown>
   )
 }
 
+
+export const ProjectDetails : React.FC = () => {
+  const context = useContext(ProjectContext);
+
+  if (!context) return null;
+  const {projectEntries, updateProjectEntry, removeProjectEntry, addProjectEntry} = context;
+
+  return (
+    <Dropdown title="Project Details">
+      {
+        projectEntries.map((entry, index)=> 
+          <Project
+            key={index}
+            index={index}
+            project={entry.project}
+            link={entry.link}
+            description={entry.description}
+            tools={entry.tools}
+            updateProjectEntry={updateProjectEntry}
+            removeProjectEntry={removeProjectEntry}
+          />
+        )
+      }
+      <button className="btn-add-entry" onClick={addProjectEntry}>Add Project Entry</button>
+    </Dropdown>
+  )
+}
+
+export const ReferenceDetails : React.FC = () => {
+  
+  const context = useContext(ReferenceContext);
+  
+  if (!context) return null;
+  const {referenceEntries, addReferenceEntry, updateReferenceEntry, removeReferenceEntry} = context;
+
+  return (
+    <Dropdown title="Reference Details">
+      {
+        referenceEntries.map((entry, index)=> 
+          <References
+            key={index}
+            index={index}
+            reference={entry.reference}
+            role={entry.role}
+            workplace={entry.workplace}
+            phone={entry.phone}
+            email={entry.email}
+            updateReferenceEntry={updateReferenceEntry}
+            removeReferenceEntry={removeReferenceEntry}
+          />
+        )
+      }
+      <button className="btn-add-entry"  onClick={addReferenceEntry} style={{width: '95%', alignSelf: 'center'}}>Add Reference Entry</button>
+    </Dropdown>
+  )
+}

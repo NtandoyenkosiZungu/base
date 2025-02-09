@@ -2,6 +2,8 @@ import {createContext, ReactNode } from "react";
 import {EducationFunctionContextProvider } from "./EducationContext";
 import { PersonalDetailsContextProvider } from "./PersonalDetailsContext";
 import { ExperienceContextProvider } from "./ExperienceContext";
+import { ProjectContextProvider } from "./ProjectContext";
+import { ReferenceContextProvider } from "./ReferenceContext";
 
 
 const MainContext = createContext<any | undefined>(undefined);
@@ -16,7 +18,11 @@ export function MainContextProvider({children}: MainProps){
             <PersonalDetailsContextProvider>
                 <EducationFunctionContextProvider>
                     <ExperienceContextProvider>
-                        {children}
+                        <ProjectContextProvider>
+                            <ReferenceContextProvider>
+                                {children}
+                            </ReferenceContextProvider>
+                        </ProjectContextProvider>    
                     </ExperienceContextProvider>
                 </EducationFunctionContextProvider>
             </PersonalDetailsContextProvider>

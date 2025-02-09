@@ -5,8 +5,8 @@ interface childProp {
 }
 
 export interface ReferenceEntry {
-    employer: string;
-    position: string;
+    reference: string;
+    role: string;
     workplace: string;
     phone: string
     email: string;
@@ -28,8 +28,8 @@ export function ReferenceContextProvider({children}: childProp){
         setReferenceEntries([
             ...referenceEntries,
             {
-                employer:'',
-                position:'',
+                reference:'',
+                role:'',
                 workplace:'',
                 phone:'',
                 email:'',

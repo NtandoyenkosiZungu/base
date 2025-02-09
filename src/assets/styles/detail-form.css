@@ -2,22 +2,46 @@
     INPUT FORM STYLES
 */
 
+button.btn-add-entry {
+    width: 75%;
+    align-self: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-add-entry:hover {
+    background-color: #d3d3d3;
+}
+
 div.input-form {
     padding: 10px;
     width: 40%;
-    height: 85%;
+    max-height: 85%;
     border: 2px solid green;
     background-color: #FFFBFC;
     position: fixed;
     top: 0;
     margin-top: 5%;
-    overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
-    
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    div.input-form {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+div.dropdown {
+    width: 95%;
 }
 
 div.dropdown-content {
@@ -25,44 +49,57 @@ div.dropdown-content {
     display: grid;
     grid-template-columns: 48% 48%;
     gap: 4%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     max-height: 0;
-
-    transition: all 0.6s ease;
-    overflow:auto;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease;
 }
 
 div.input-form div.dropdown-content.show {
-    max-height: 270px;
+    max-height: 500px;
+    opacity: 1;
 }
-
-
 
 div.dropdown > button {
     width: 100%;
     padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+div.dropdown > button:hover {
+    background-color: #f0f0f0;
 }
 
 button.add-entry {
-    height: 10px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.add-entry:hover {
+    background-color: #e0e0e0;
 }
 
 div.btn-container {
     width: 100%;
     padding: 10px;
-    
+
     display: grid;
     grid-template-columns: 80% 20%;
-    margin-left: -2%;
+    align-items: center;
 }
 
 div.btn-container > button {
     width: 100%;
     padding: 10px;
-    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-div.btn-container > button.btn-delete{
+div.btn-container > button.btn-delete {
     background-color: red;
     border: 3px solid blueviolet;
     border-top-right-radius: 5px;
@@ -71,14 +108,18 @@ div.btn-container > button.btn-delete{
     font-weight: bold;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+div.btn-container > button.btn-delete:hover {
+    background-color: darkred;
+    transform: scale(1.05);
 }
 
 div.input-form span {
     display: flex;
     flex-direction: column;
 }
-
 
 /* 
     OUTPUT FORM STYLES
@@ -94,9 +135,21 @@ div.output-form {
     top: 0;
     margin-top: 5%;
     margin-left: 50%;
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    div.output-form {
+        width: 90%;
+        margin: 5% auto;
+    }
 }
 
 div.resume {
     background-color: #FFFBFC;
+    padding: 10px;
+    border-radius: 5px;
 }
