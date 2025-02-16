@@ -3,7 +3,24 @@ div.res-one {
     min-height: 100%;
     border-radius: 5px;
     background-color: #FFFBFC;
+
     overflow: hidden;
+    word-wrap: break-word;
+
+
+    font-weight: 600;
+}
+
+div.res-one ul {
+    list-style-type: none;
+    padding-top: 5px;
+    
+    font-size: 15px;
+}
+
+div.res-one li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
 }
 
 pre {
@@ -24,8 +41,8 @@ div.res-one > *{
 
 div.res-one-details {
     display: grid;
-    grid-template-columns: 50% 40%;
-    gap: 10px;
+    grid-template-columns: 50% 48%;
+    gap: 2%;
     padding: 10px;
 }
 
@@ -51,9 +68,6 @@ div.res-content {
     gap: 20%;
 }
 
-div.res-content > span {
-
-}
 
 div.res-content > span.left-side, span.right-side {
     display: flex;

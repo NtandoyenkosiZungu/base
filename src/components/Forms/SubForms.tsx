@@ -2,9 +2,10 @@ import { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import {EducationFunctionContext} from "../../Contexts/EducationContext";
 import { ExperienceContext } from "../../Contexts/ExperienceContext";
-import { Education, Experience, Project, References, Dropdown } from "./SubFormComponents";
+import { Education, Experience, Project, References, Dropdown, Achievement } from "./SubFormComponents";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import { ReferenceContext } from "../../Contexts/ReferenceContext";
+import { AchievementContext } from "../../Contexts/Achievements";
 
 
 export const EducationDetails: React.FC = () => {
@@ -34,7 +35,7 @@ export const EducationDetails: React.FC = () => {
             />
           ))
         }
-        <button className="btn-add-entry" onClick={addEducationEntry}>Add Education Entry</button>
+        <button className="" onClick={addEducationEntry}>Add Education Entry</button>
     </Dropdown>
   );
 };
@@ -47,7 +48,7 @@ export const PersonalDetails: React.FC = () => {
     return null; // Return early if no context is available.
   }
 
-  const { name, setName, surname, setSurname, email, setEmail, phone, setPhone, address, setAddress} = context;
+  const { name, setName, surname, setSurname, email, setEmail, phone, setPhone, address, setAddress, role, setRole} = context;
   
 
   const toogleDropdown = () => {
@@ -57,7 +58,7 @@ export const PersonalDetails: React.FC = () => {
   return (
     <>
       <div className="dropdown">
-        <button className="btn-add-entry" onClick={toogleDropdown}>Personal Details</button>
+        <button className="" onClick={toogleDropdown}>Personal Details</button>
         <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
           <span>
             <label htmlFor="name">Name</label>
@@ -80,8 +81,8 @@ export const PersonalDetails: React.FC = () => {
             <input type="text" name="address" id="address" value={address} onChange={e => setAddress(e.target.value)}/>
           </span>
           <span>
-            <label htmlFor="dob">Date of Birth</label>
-            <input type="date" name="dob" id="dob" />
+            <label htmlFor="job-role">Role Inquiry</label>
+            <input type="text" name="job-role" id="job-role" value={role} onChange={e => setRole(e.target.value)} />
           </span>
         </div>
       </div>
@@ -115,7 +116,7 @@ export const ExperienceDetails: React.FC = () => {
           />
         )
       }
-      <button className="btn-add-entry" onClick={addExperienceEntry}>Add Experience Entry</button>
+      <button className="" onClick={addExperienceEntry}>Add Experience Entry</button>
     </Dropdown>
   )
 }
@@ -125,7 +126,7 @@ export const ProjectDetails : React.FC = () => {
   const context = useContext(ProjectContext);
 
   if (!context) return null;
-  const {projectEntries, updateProjectEntry, removeProjectEntry, addProjectEntry} = context;
+  const {projectEntries, updateProjectEntry, removeProjectEntry, addProjectEntry, addTool, removeTool} = context;
 
   return (
     <Dropdown title="Project Details">
@@ -137,13 +138,14 @@ export const ProjectDetails : React.FC = () => {
             project={entry.project}
             link={entry.link}
             description={entry.description}
-            tools={entry.tools}
             updateProjectEntry={updateProjectEntry}
             removeProjectEntry={removeProjectEntry}
+            addTool={addTool}
+            removeTool={removeTool}
           />
         )
       }
-      <button className="btn-add-entry" onClick={addProjectEntry}>Add Project Entry</button>
+      <button className="" onClick={addProjectEntry}>Add Project Entry</button>
     </Dropdown>
   )
 }
@@ -172,7 +174,33 @@ export const ReferenceDetails : React.FC = () => {
           />
         )
       }
-      <button className="btn-add-entry"  onClick={addReferenceEntry} style={{width: '95%', alignSelf: 'center'}}>Add Reference Entry</button>
+      <button className=""  onClick={addReferenceEntry} style={{width: '95%', alignSelf: 'center'}}>Add Reference Entry</button>
+    </Dropdown>
+  )
+}
+
+
+export const AchievementsDetails: React.FC = () => {
+  const context = useContext(AchievementContext);
+  if (!context) return null;
+
+  const {achievementEntries, addAchievementEntry, updateAchievementEntry, removeAchievementEntry} = context;
+  return (
+    <Dropdown title="Achievements Details">
+      {
+        achievementEntries.map((entry, index)=>
+          <Achievement
+            key={index}
+            index={index}
+            title={entry.title}
+            provider={entry.provider}
+            date={entry.date}
+            updateAchievementEntry={updateAchievementEntry}
+            removeAchievementEntry={removeAchievementEntry}
+          />
+        )
+      }
+      <button className="" onClick={addAchievementEntry}>Add Achievement Entry</button>
     </Dropdown>
   )
 }

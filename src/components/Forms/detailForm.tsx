@@ -1,5 +1,5 @@
 import '../../assets/styles/detail-form.css';
-import { EducationDetails, PersonalDetails, ExperienceDetails, ProjectDetails, ReferenceDetails } from './SubForms';
+import { EducationDetails, PersonalDetails, ExperienceDetails, ProjectDetails, ReferenceDetails, AchievementsDetails } from './SubForms';
 
 import { TemplateOne } from '../Templates/TemplateOne';
 import { MainContextProvider } from '../../Contexts/MainFunctionContext';
@@ -16,6 +16,8 @@ const DetailForm: React.FC = () => {
           <ExperienceDetails />
           <hr />
           <ProjectDetails />
+          <hr />
+          <AchievementsDetails/>
           <hr />
           <ReferenceDetails />
         </div>

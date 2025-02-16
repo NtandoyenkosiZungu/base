@@ -19,6 +19,8 @@ interface ProjectContextProps {
     addProjectEntry: ()=> void;
     updateProjectEntry: (index:number, field: keyof ProjectEntry, value: string)=> void;
     removeProjectEntry: (index: number)=> void;
+    addTool: (index: number, tool: string)=> void;
+    removeTool: (index: number)=> void;
 }
 
 export const ProjectContext = createContext<ProjectContextProps | undefined>(undefined);
@@ -27,16 +29,15 @@ export function ProjectContextProvider ({children}: childProp) {
     const [projectEntries, setProjectEntries] = useState<ProjectEntry[]>([]);
 
     const addProjectEntry = () => {
-        setProjectEntries(
-            [...projectEntries,
-                {
-                    project: '',
-                    link: '',
-                    tools: [],
-                    description:''
-                }
-            ]
-        )
+        setProjectEntries(prevEntries => [
+            ...prevEntries,
+            {
+                project: '',
+                link: '',
+                tools: [],
+                description:''
+            }
+        ]);
     }
 
     const updateProjectEntry = (
@@ -55,8 +56,26 @@ export function ProjectContextProvider ({children}: childProp) {
         setProjectEntries(updatedEntries);
     }
 
+    const addTool = (index: number, tool: string) => {
+        const updatedEntries = projectEntries.map((entry, i)=> 
+            i === index ? { ...entry, tools: [...entry.tools, tool] } : entry
+        );
+        console.log(updatedEntries[0].tools);
+        
+        setProjectEntries(updatedEntries);
+    }
+
+    const removeTool = (index: number) => {
+        const updatedEntries = projectEntries.map((entry, i)=> 
+            i === index ? { ...entry, tools: entry.tools.slice(0, -1) } : entry
+        );
+        console.log(updatedEntries[0].tools);
+        
+        setProjectEntries(updatedEntries)
+    }
+
     return (
-        <ProjectContext.Provider value={{projectEntries, addProjectEntry, updateProjectEntry, removeProjectEntry}}>
+        <ProjectContext.Provider value={{projectEntries, addProjectEntry, updateProjectEntry, removeProjectEntry, addTool, removeTool}}>
             {children}
         </ProjectContext.Provider>
     )

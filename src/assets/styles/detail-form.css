@@ -56,7 +56,18 @@ div.dropdown-content {
     transition: max-height 0.6s ease, opacity 0.6s ease;
 }
 
-div.input-form div.dropdown-content.show {
+div.dropdown-content-v2 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease;
+}
+div.input-form div.dropdown-content.show, div.input-form div.dropdown-content-v2.show {
     max-height: 500px;
     opacity: 1;
 }

@@ -11,6 +11,7 @@ export interface ExperienceEntry {
     startDate: string;
     endDate: string;
     description: string;
+
 }
 
 interface experienceContextProps {
