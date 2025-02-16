@@ -3,7 +3,7 @@ import { EducationEntry } from "../../Contexts/EducationContext";
 import { ExperienceEntry } from "../../Contexts/ExperienceContext";
 import { ProjectEntry } from "../../Contexts/ProjectContext";
 import {ReferenceEntry } from "../../Contexts/ReferenceContext";
-import { AchievementEntry } from "../../Contexts/Achievements";
+import { AchievementEntry } from "../../Contexts/AchievementsContext";
 
 
 

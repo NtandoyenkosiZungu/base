@@ -5,7 +5,7 @@ import { PersonalDetailsContext } from '../../Contexts/PersonalDetailsContext';
 import { EducationFunctionContext } from '../../Contexts/EducationContext';
 import { ExperienceContext } from '../../Contexts/ExperienceContext';
 import { ProjectContext } from '../../Contexts/ProjectContext';
-import { AchievementContext } from '../../Contexts/Achievements';
+import { AchievementContext } from '../../Contexts/AchievementsContext';
 import { ReferenceContext } from '../../Contexts/ReferenceContext';
 
 export const TemplateOne: React.FC = () => {

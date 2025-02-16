@@ -4,7 +4,7 @@ import { PersonalDetailsContextProvider } from "./PersonalDetailsContext";
 import { ExperienceContextProvider } from "./ExperienceContext";
 import { ProjectContextProvider } from "./ProjectContext";
 import { ReferenceContextProvider } from "./ReferenceContext";
-import { AchievementContextProvider } from "./Achievements";
+import { AchievementContextProvider } from "./AchievementsContext";
 
 
 const MainContext = createContext<any | undefined>(undefined);
