@@ -48,7 +48,7 @@ div.dropdown-content {
     margin-top: 20px;
     display: grid;
     grid-template-columns: 48% 48%;
-    gap: 4%;
+    gap: 4%;;
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 0;

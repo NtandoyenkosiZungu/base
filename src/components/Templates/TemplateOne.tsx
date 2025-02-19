@@ -36,7 +36,7 @@ export const TemplateOne: React.FC = () => {
     const {referenceEntries} = referenceContext;
 
     return (
-        <div className='res-one'>
+        <div className='res-one' id="cv-template">
             <div className="res-one-details">
                 <span>
                     <p className='name'>{name.length > 0 ? name + " " : "Name "} {surname.length > 0 ? surname: "Surname"}</p>
@@ -44,15 +44,15 @@ export const TemplateOne: React.FC = () => {
                 </span>
                 <span>
                    <ul>
-                    <li>{address.length > 0 ? address : 'City, Name, Zip'}</li>
-                    <li>{phone.length > 0 ? (phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
-                    <li>{email.length > 0 ? email: 'info@example.com'}</li>
+                    <li>{address.length > 0 ? '📍 '+ address : 'City, Name, Zip'}</li>
+                    <li>{phone.length > 0 ? '📞 '+(phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
+                    <li>{email.length > 0 ? '📧 '+email: 'info@example.com'}</li>
                    </ul>
                 </span>
             </div>
-            <hr />
+            <hr className={educationEntries.length > 0? "" : 'none-display'} />
 
-            <div className={educationEntries.length > 0? "res-one-education" : 'none-display'} >
+            <div className={educationEntries.length > 0? "" : 'none-display'} >
             <div className="heading">
                 EDUCATION
             </div>
@@ -68,8 +68,10 @@ export const TemplateOne: React.FC = () => {
                     />
                 ))}
             </div>
-            <hr />
-            <div className="res-one-achievements">
+
+            <hr className={achievementEntries.length > 0 ? '' : 'none-display'} />
+
+            <div className={achievementEntries.length > 0 ? '' : 'none-display'}>
                 <div className="heading">
                     ACHIEVEMENTS
                 </div>
@@ -85,7 +87,8 @@ export const TemplateOne: React.FC = () => {
             </div>
 
             <hr className={experienceEntries.length > 0 ? "": "none-display"}/>
-            <div className={experienceEntries.length > 0 ? "res-one-experience" : 'none-display'}>
+
+            <div className={experienceEntries.length > 0 ? "" : 'none-display'}>
                 <div className="heading">EXPERIENCE</div>
                 {
                     experienceEntries.map((entry, index)=> 
@@ -100,7 +103,9 @@ export const TemplateOne: React.FC = () => {
                     )
                 }
             </div>
+
             <hr className={projectEntries.length > 0 ? "" : 'none-display'}/>
+
             <div className= {projectEntries.length > 0 ? "res-one-projects" : 'none-display'}>
                 <div className="heading">
                     PROJECTS
@@ -117,12 +122,14 @@ export const TemplateOne: React.FC = () => {
                     )
                 }
             </div>
-            <hr />
-            <div className="res-one-references">
+
+            <hr className={referenceEntries.length > 0 ?  '': 'none-display'}/>
+
+            <div className={referenceEntries.length > 0 ?  '': 'none-display'}>
                 <div className="heading">
                     REFERENCES
                 </div>
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem'}}>
+                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem'}}>
                     {
                         referenceEntries.map((entry, index) => 
                             <TemplateOneReferenceDetails key={index}
@@ -245,7 +252,7 @@ const TemplateOneAchievementDetails: React.FC<achievementProps> = ({title, provi
         <>
             <div className='res-content' style={{display:'grid', gridTemplateColumns: '1.5fr 1fr'}}>
                 <span className='left-side'>
-                    <p>{provider} | {title}</p>
+                    <p>{provider} | <b>{title}</b> </p>
                 </span>
                 <span className='right-side'>
                     <p>{date}</p>
@@ -267,17 +274,21 @@ interface referenceProps {
 const TemplateOneReferenceDetails: React.FC<referenceProps> = ({reference, role, workplace, phone, email}) => {
     return (
         <>
-            <div>
+            <div style={{marginLeft: '0.5rem'}}>
                 <span>
-                    <p>{reference}</p>
+                    <p>
+                        <u>
+                            {reference}
+                        </u>
+                    </p>
                 </span>
-                <span>
+                <div style={{color:'#414141', fontSize: '0.9rem', marginTop: '-0.5rem'}}>    
                     <p>{workplace}/{role}</p>
-                </span>
-                <span>
-                    <p>Phone: {phone}</p>
-                    <p>Email: {email}</p>
-                </span>
+                </div>
+                <div>
+                    <p>📞: {phone}</p>
+                    <p style={{marginTop:'-0.5rem'}}>📧: {email}</p>
+                </div>
             </div>
         </>
     )

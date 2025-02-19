@@ -24,6 +24,8 @@ div.res-one li {
 }
 
 pre {
+    font-size: 13.5px;
+    font-weight: 530;
     width: 100%;
     white-space: pre-wrap;
     word-wrap: break-word;
