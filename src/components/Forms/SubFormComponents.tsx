@@ -5,6 +5,7 @@ import { ProjectEntry } from "../../Contexts/ProjectContext";
 import {ReferenceEntry } from "../../Contexts/ReferenceContext";
 import { AchievementEntry } from "../../Contexts/AchievementsContext";
 
+import TextEditor from "./TextEditor";
 
 
 
@@ -107,7 +108,15 @@ export const Education: React.FC<educationProps> = ({institution, location, leve
         </span>
         <span>
           <label htmlFor="level">Level</label>
-          <input type="text" name="level" id="level" value={level} onChange={(e)=> updateEducationEntry(index, 'level', e.target.value)} />
+          <input list="education-levels" value={level} onChange={(e)=> updateEducationEntry(index, 'level', e.target.value)}/>
+          <datalist id="education-levels">
+            <option value="High School"/>
+            <option value="Diploma"/>
+            <option value="Bachelors"/>
+            <option value="Honors"/>
+            <option value="Masters"/>
+            <option value="PhD"/>
+          </datalist>
         </span>
         <span>
           <label htmlFor="study">Field Of Study</label>
@@ -159,8 +168,11 @@ export const Experience : React.FC<experienceProps> =({workplace, role, startDat
         </span>
       </div>
       <span>
-        <label htmlFor="project-description">Project Description</label>
-        <textarea name="project-description" id="project-description" rows={3}  value={description} onChange={(e)=> updateExperience(index, 'description', e.target.value)}/>
+        <TextEditor 
+          content={description} 
+          index={index} 
+          setContent={(index, field, value) => updateExperience(index, field as keyof ExperienceEntry, value)}
+        />
       </span>
     </DropdownContent2>
   )
@@ -216,8 +228,11 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
      </div>
 
       <span>
-        <label htmlFor="project-description">Project Description</label>
-        <textarea name="project-description" id="project-description" rows={3}  value={description} onChange={(e)=> updateProjectEntry(index, 'description', e.target.value)}/>
+        <TextEditor 
+          content={description} 
+          index={index} 
+          setContent={(index, field, value) => updateProjectEntry(index, field as keyof ProjectEntry, value)}
+        />
       </span>
     </DropdownContent2>
   )

@@ -42,11 +42,11 @@ export const TemplateOne: React.FC = () => {
                     <p className='name'>{name.length > 0 ? name + " " : "Name "} {surname.length > 0 ? surname: "Surname"}</p>
                     <p className='title'>{role.length > 0? role: "Job Title"}</p>
                 </span>
-                <span>
+                <span className='res-one-personal-details'>
                    <ul>
-                    <li>{address.length > 0 ? '📍 '+ address : 'City, Name, Zip'}</li>
-                    <li>{phone.length > 0 ? '📞 '+(phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
-                    <li>{email.length > 0 ? '📧 '+email: 'info@example.com'}</li>
+                    <li>{address.length > 0 ? address : 'City, Name, Zip'}</li>
+                    <li>{phone.length > 0 ?  (phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
+                    <li>{email.length > 0 ? '': 'info@example.com'} <a className={email.length > 0 ? '': 'none-display'} href={"mailto:"+email}>{email}</a></li>
                    </ul>
                 </span>
             </div>
@@ -141,6 +141,7 @@ export const TemplateOne: React.FC = () => {
                         />
                     )
                     }
+
                 </div>
             </div>
         </div>
@@ -209,8 +210,9 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
                     <p>{duration}</p>
                 </span>
             </div>
-            <div className="description">
-                <pre>{description}</pre>
+            <div className="description" style={{marginTop: '0.5rem'}}>
+                Description
+                <div dangerouslySetInnerHTML={{__html: description}}/>
             </div>
         </>
     )
@@ -232,8 +234,9 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
                     <p>{project} | <a href={link} target='_blank'>LINK</a></p>
                 </span>
             </div>
-            <div className="description">
-                <pre>{description}</pre>
+            <div className="description" style={{marginTop: '0.5rem'}}>
+                Description
+                <div dangerouslySetInnerHTML={{__html: description}} />
             </div>
             <div className="tools">
                 <p>Tools: {tools.join(', ')}</p>

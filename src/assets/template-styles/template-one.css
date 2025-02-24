@@ -11,14 +11,14 @@ div.res-one {
     font-weight: 600;
 }
 
-div.res-one ul {
+span.res-one-personal-details ul {
     list-style-type: none;
     padding-top: 5px;
     
     font-size: 15px;
 }
 
-div.res-one li {
+span.res-one-personal-details li {
     border-bottom: 1px solid #ccc;
     padding: 5px;
 }
