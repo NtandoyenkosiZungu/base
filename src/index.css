@@ -39,6 +39,9 @@
       visibility: hidden;
     }
   
+    div.output-form{
+      position: unset;
+    }
     /* Show only the .print-section */
     .res-one,
     .res-one * {

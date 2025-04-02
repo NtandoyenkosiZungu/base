@@ -5,15 +5,17 @@ import { PersonalDetailsContext } from '../../Contexts/PersonalDetailsContext';
 import { EducationFunctionContext } from '../../Contexts/EducationContext';
 import { ExperienceContext } from '../../Contexts/ExperienceContext';
 import { ProjectContext } from '../../Contexts/ProjectContext';
-import { AchievementContext } from '../../Contexts/AchievementsContext';
+import { CertificationContext } from '../../Contexts/CertificationContext';
 import { ReferenceContext } from '../../Contexts/ReferenceContext';
+import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
+import { AchievementContext } from '../../Contexts/AchievementContext';
 
 export const TemplateOne: React.FC = () => {
 
     //RETRIEVING THE STATE OF PersonalDetails through the Context API
     const personalContext = useContext(PersonalDetailsContext);
     if (!personalContext) return null;
-    const {name, surname, address, phone, email, role} = personalContext;
+    const {name, surname, address, phone, email, role, summary} = personalContext;
 
     const  educationContext= useContext(EducationFunctionContext);   
     if (!educationContext) return null;
@@ -27,13 +29,21 @@ export const TemplateOne: React.FC = () => {
     if (!projectContext) return null;
     const {projectEntries} = projectContext;
 
-    const achivementContext = useContext(AchievementContext);
-    if (!achivementContext) return null;
-    const {achievementEntries} = achivementContext;
+    const certificationContext = useContext(CertificationContext);
+    if (!certificationContext) return null;
+    const {CertificationEntries} = certificationContext;
 
     const referenceContext = useContext(ReferenceContext);
     if (!referenceContext) return null;
     const {referenceEntries} = referenceContext;
+
+    const technicalSkillcontext = useContext(TechnicalSkillsContext);
+    if(!technicalSkillcontext) return null;
+    const {TechnicalSkillEntries} = technicalSkillcontext;
+
+    const achievementContext = useContext(AchievementContext);
+    if (!achievementContext) return null;
+    const {AchievementEntries} = achievementContext;
 
     return (
         <div className='res-one' id="cv-template">
@@ -50,8 +60,20 @@ export const TemplateOne: React.FC = () => {
                    </ul>
                 </span>
             </div>
-            <hr className={educationEntries.length > 0? "" : 'none-display'} />
 
+            <hr   className={summary.length > 0 ? '':'none-display'}/>
+            <div className={summary.length > 0 ? '':'none-display'}>
+                <div className='heading'>
+                    SUMMARY
+                </div>
+                <div>
+                    <pre>
+                        {summary}
+                    </pre>
+                </div>
+            </div>
+
+            <hr className={educationEntries.length > 0? "" : 'none-display'} />
             <div className={educationEntries.length > 0? "" : 'none-display'} >
             <div className="heading">
                 EDUCATION
@@ -67,23 +89,6 @@ export const TemplateOne: React.FC = () => {
                         endDate={entry.end_date}
                     />
                 ))}
-            </div>
-
-            <hr className={achievementEntries.length > 0 ? '' : 'none-display'} />
-
-            <div className={achievementEntries.length > 0 ? '' : 'none-display'}>
-                <div className="heading">
-                    ACHIEVEMENTS
-                </div>
-                {
-                    achievementEntries.map((entry, index) => 
-                        <TemplateOneAchievementDetails key={index}
-                            title={entry.title}
-                            provider={entry.provider}
-                            date={entry.date}
-                        />
-                    )
-                }
             </div>
 
             <hr className={experienceEntries.length > 0 ? "": "none-display"}/>
@@ -103,6 +108,37 @@ export const TemplateOne: React.FC = () => {
                     )
                 }
             </div>
+            <hr className={CertificationEntries.length > 0 ? '' : 'none-display'} />
+
+            <div className={CertificationEntries.length > 0 ? '' : 'none-display'}>
+                <div className="heading">
+                    CERTIFICATIONS
+                </div>
+                {
+                    CertificationEntries.map((entry, index) => 
+                        <TemplateOneCertificationDetails key={index}
+                            title={entry.title}
+                            provider={entry.provider}
+                            date={entry.date}
+                        />
+                    )
+                }
+            </div>
+
+            <hr className={TechnicalSkillEntries.length > 0 ? '' : 'none-display'} />
+            <div className={TechnicalSkillEntries.length > 0 ? '' : 'none-display'}>
+                <div className='heading'>
+                    TECHNICAL SKILLS
+                </div>
+                <ul style={{marginLeft: "-5%"}}>
+                    {
+                        TechnicalSkillEntries.map((entry, index) => 
+                            <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}} />
+                        )
+                    }
+                </ul>
+            </div>
+
 
             <hr className={projectEntries.length > 0 ? "" : 'none-display'}/>
 
@@ -122,9 +158,23 @@ export const TemplateOne: React.FC = () => {
                     )
                 }
             </div>
+            
+            <hr className={AchievementEntries.length > 0? '': 'none-display'}/>
+            <div className={AchievementEntries.length > 0? '': 'none-display'}>
+                <div className='heading'>
+                    ACHIEVEMENTS
+                </div>
+                <ul>
+                {
+                    AchievementEntries.map((entry,) => 
+                        <div style={{marginLeft: '-5%'}} dangerouslySetInnerHTML={{__html: entry.achievement}} />
+                    )
+                }
+                </ul>
+            </div>
+
 
             <hr className={referenceEntries.length > 0 ?  '': 'none-display'}/>
-
             <div className={referenceEntries.length > 0 ?  '': 'none-display'}>
                 <div className="heading">
                     REFERENCES
@@ -161,10 +211,10 @@ interface educationprops{
 const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, location, level, field, startDate, endDate}) => {
     //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
     let duration = "Duration"
-    if (endDate != 'Present') {
+    if (endDate != 'Present' && endDate != 'Incomplete') {
         duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-5);
     } else {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-4);
+        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate;
     }
     return (
         <>
@@ -210,7 +260,7 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
                     <p>{duration}</p>
                 </span>
             </div>
-            <div className="description" style={{marginTop: '0.5rem'}}>
+            <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
                 Description
                 <div dangerouslySetInnerHTML={{__html: description}}/>
             </div>
@@ -234,7 +284,7 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
                     <p>{project} | <a href={link} target='_blank'>LINK</a></p>
                 </span>
             </div>
-            <div className="description" style={{marginTop: '0.5rem'}}>
+            <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
                 Description
                 <div dangerouslySetInnerHTML={{__html: description}} />
             </div>
@@ -244,13 +294,15 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
         </>
     )
 }
-interface achievementProps {
+
+
+interface CertificationProps {
     title: string;
     provider: string;
     date: string;
 
 }
-const TemplateOneAchievementDetails: React.FC<achievementProps> = ({title, provider, date}) => {
+const TemplateOneCertificationDetails: React.FC<CertificationProps> = ({title, provider, date}) => {
     return (
         <>
             <div className='res-content' style={{display:'grid', gridTemplateColumns: '1.5fr 1fr'}}>
@@ -264,6 +316,7 @@ const TemplateOneAchievementDetails: React.FC<achievementProps> = ({title, provi
         </>
     )
 }
+
 
 
 interface referenceProps {

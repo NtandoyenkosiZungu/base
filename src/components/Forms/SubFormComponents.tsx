@@ -3,9 +3,12 @@ import { EducationEntry } from "../../Contexts/EducationContext";
 import { ExperienceEntry } from "../../Contexts/ExperienceContext";
 import { ProjectEntry } from "../../Contexts/ProjectContext";
 import {ReferenceEntry } from "../../Contexts/ReferenceContext";
-import { AchievementEntry } from "../../Contexts/AchievementsContext";
+import { CertificationEntry } from "../../Contexts/CertificationContext";
 
 import TextEditor from "./TextEditor";
+import { AchievementEntry } from "../../Contexts/AchievementContext";
+import { TechnicalSkillEntry } from "../../Contexts/TechnicalSkillsContext";
+import { softSkillEntry } from "../../Contexts/SoftSkillsContext";
 
 
 
@@ -23,7 +26,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
 
   return (
     <div className="dropdown">
-      <button onClick={toggleDropdown}>{title}</button>
+      <button onClick={toggleDropdown} className="button-30">{title}</button>
       <div className={`dropdown-content ${isOpen ? "show" : ""}`} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         {children}
       </div>
@@ -49,7 +52,7 @@ const DropdownContent: React.FC<DropdownContentProps> = ({ title, children, inde
   return (
     <div className="dropdown" style={{alignSelf: 'center'}}>
       <div className="btn-container">
-        <button onClick={toggleDropdown}>{title}</button>
+        <button onClick={toggleDropdown} className="button-6">{title}</button>
         <button className="btn-delete" onClick={()=>{ if (window.confirm("Are you sure you want to remove this entry?")) removeEntry(index) }} >
           Delete
         </button>
@@ -61,7 +64,7 @@ const DropdownContent: React.FC<DropdownContentProps> = ({ title, children, inde
   );
 }
 
-const DropdownContent2: React.FC<DropdownContentProps> = ({ title, children, index, removeEntry }) =>{
+export const DropdownContent2: React.FC<DropdownContentProps> = ({ title, children, index, removeEntry }) =>{
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -69,7 +72,7 @@ const DropdownContent2: React.FC<DropdownContentProps> = ({ title, children, ind
   return (
     <div className="dropdown" style={{alignSelf: 'center'}}>
       <div className="btn-container">
-        <button onClick={toggleDropdown}>{title}</button>
+        <button onClick={toggleDropdown} className="button-6">{title}</button>
         <button className="btn-delete" onClick={()=>{ if (window.confirm("Are you sure you want to remove this entry?")) removeEntry(index) }} >
           Delete
         </button>
@@ -169,7 +172,9 @@ export const Experience : React.FC<experienceProps> =({workplace, role, startDat
       </div>
       <span>
         <TextEditor 
+          label="Description"
           content={description} 
+          field="description"
           index={index} 
           setContent={(index, field, value) => updateExperience(index, field as keyof ExperienceEntry, value)}
         />
@@ -211,8 +216,9 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
         <label htmlFor="project-tools">Tools Used</label>
         <input type="text" name="project-tools" id="project-tools" ref={toolRef}/>
       </span>
-      <button style={{height:"30px", alignSelf: 'center', marginTop: '4px'}}
-        onClick={()=> {
+      <button 
+          style={{height:"30px", alignSelf: 'center', marginTop: '4px'}}
+          onClick={()=> {
           addTool(index, toolRef.current?.value || '')
           toolRef.current!.value = ''
         }}
@@ -220,7 +226,8 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
         Add
       </button>
 
-      <button style={{height:"30px", alignSelf: 'center', marginTop: '4px'}}
+      <button 
+        style={{height:"30px", alignSelf: 'center', marginTop: '4px'}}
         onClick={()=> removeTool(index)}
       >
         Remove
@@ -229,7 +236,9 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
 
       <span>
         <TextEditor 
+          label="Description"
           content={description} 
+          field="description"
           index={index} 
           setContent={(index, field, value) => updateProjectEntry(index, field as keyof ProjectEntry, value)}
         />
@@ -279,35 +288,104 @@ export const References : React.FC<ReferenceProps> = ({reference, role, workplac
   )
 }
 
-interface AchiementProps {
+interface CertificationProps {
   title: string;
   provider: string;
   date: string;
   index: number;
 
+  updateCertificationEntry: (index: number, field: keyof CertificationEntry, value: string) => void;
+  removeCertificationEntry: (index: number) => void;
+}
+
+export const Certification: React.FC<CertificationProps> = ({title, provider, date, index, updateCertificationEntry, removeCertificationEntry}) => {
+  return (
+    <DropdownContent title={title.length > 0? title : 'Certification Title'} index={index} removeEntry={removeCertificationEntry}>
+      <span>
+        <label htmlFor="Certification-title">Certification Title</label>
+        <input type="text" name="Certification-title" id="Certification-title" value={title} onChange={(e)=> updateCertificationEntry(index, 'title', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="Certification-provider">Provider</label>
+        <input type="text" name="Certification-provider" id="Certification-provider" value={provider} onChange={(e)=> updateCertificationEntry(index, 'provider', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="Certification-date">Date</label>
+        <input type="text" name="Certification-date" id="Certification-date" value={date} onChange={(e)=> updateCertificationEntry(index, 'date', e.target.value)}/>
+      </span>
+      <span>
+        <label htmlFor="Certification-link">Link</label>
+        <input type="text" name="Certification-link" id="Certification-link" />
+      </span>
+    </DropdownContent>
+  )
+}
+
+interface AchievementProps {
+  achievement: string;
+  index: number;
   updateAchievementEntry: (index: number, field: keyof AchievementEntry, value: string) => void;
   removeAchievementEntry: (index: number) => void;
 }
 
-export const Achievement: React.FC<AchiementProps> = ({title, provider, date, index, updateAchievementEntry, removeAchievementEntry}) => {
+export const Achievement: React.FC<AchievementProps> = ({achievement, index, updateAchievementEntry, removeAchievementEntry}) => {
   return (
-    <DropdownContent title={title.length > 0? title : 'Achievement Title'} index={index} removeEntry={removeAchievementEntry}>
+    <DropdownContent2 title={'Achievements'} index={index} removeEntry={removeAchievementEntry}>
+        <span>
+            <TextEditor
+              label="Achievements"
+              content={achievement}
+              field = "achievement"
+              index={index}
+              setContent={(index, field, value) => updateAchievementEntry(index, field as keyof AchievementEntry, value)}
+            />
+        </span>
+    </DropdownContent2> 
+  )
+}
+
+interface TechnicalSkillsProps{
+  index: number;
+  skill: string,
+  updateSkillEntry: (index: number, field: keyof TechnicalSkillEntry, value: string) => void;
+  removeSkillEntry: (index: number) => void;
+}
+
+export const TechnicalSkill: React.FC<TechnicalSkillsProps> = ({index, skill, updateSkillEntry, removeSkillEntry}) => {
+  return(
+    <DropdownContent2 title={"Technicall Skills"} index={index} removeEntry={removeSkillEntry}>
       <span>
-        <label htmlFor="achievement-title">Achievement Title</label>
-        <input type="text" name="achievement-title" id="achievement-title" value={title} onChange={(e)=> updateAchievementEntry(index, 'title', e.target.value)}/>
+        <TextEditor  
+          label="Technical Skills"
+          content={skill}
+          field="skill"
+          index={index}
+          setContent={(index, field, value) => updateSkillEntry(index, field as keyof TechnicalSkillEntry , value)}
+        />
       </span>
+    </DropdownContent2>
+  )
+}
+
+interface SoftSKillProps{
+  index: number;
+  skill: string,
+  updateSkillEntry: (index: number, field: keyof softSkillEntry, value: string) => void;
+  removeSkillEntry: (index: number) => void;
+}
+
+export const SoftSkill: React.FC<SoftSKillProps> = ({index, skill, updateSkillEntry, removeSkillEntry}) => {
+  return(
+    <DropdownContent2 title={"Technicall Skills"} index={index} removeEntry={removeSkillEntry}>
       <span>
-        <label htmlFor="achievement-provider">Provider</label>
-        <input type="text" name="achievement-provider" id="achievement-provider" value={provider} onChange={(e)=> updateAchievementEntry(index, 'provider', e.target.value)}/>
+        <TextEditor  
+          label="Soft Skills"
+          content={skill}
+          field="skill"
+          index={index}
+          setContent={(index, field, value) => updateSkillEntry(index, field as keyof softSkillEntry , value)}
+        />
       </span>
-      <span>
-        <label htmlFor="achievement-date">Date</label>
-        <input type="text" name="achievement-date" id="achievement-date" value={date} onChange={(e)=> updateAchievementEntry(index, 'date', e.target.value)}/>
-      </span>
-      <span>
-        <label htmlFor="achievement-link">Link</label>
-        <input type="text" name="achievement-link" id="achievement-link" />
-      </span>
-    </DropdownContent>
+    </DropdownContent2>
   )
 }

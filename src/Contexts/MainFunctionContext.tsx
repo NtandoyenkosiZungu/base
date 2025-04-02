@@ -4,7 +4,10 @@ import { PersonalDetailsContextProvider } from "./PersonalDetailsContext";
 import { ExperienceContextProvider } from "./ExperienceContext";
 import { ProjectContextProvider } from "./ProjectContext";
 import { ReferenceContextProvider } from "./ReferenceContext";
-import { AchievementContextProvider } from "./AchievementsContext";
+import { CertificationContextProvider } from "./CertificationContext";
+import { AchievementContextProvider } from "./AchievementContext";
+import { TechnicalSkillsContextProvider } from "./TechnicalSkillsContext";
+
 
 
 const MainContext = createContext<any | undefined>(undefined);
@@ -21,9 +24,13 @@ export function MainContextProvider({children}: MainProps){
                     <ExperienceContextProvider>
                         <ProjectContextProvider>
                             <ReferenceContextProvider>
-                                <AchievementContextProvider>
-                                    {children}
-                                </AchievementContextProvider>
+                                <CertificationContextProvider>
+                                   <AchievementContextProvider>
+                                        <TechnicalSkillsContextProvider>
+                                            {children}
+                                        </TechnicalSkillsContextProvider>
+                                   </AchievementContextProvider>
+                                </CertificationContextProvider>
                             </ReferenceContextProvider>
                         </ProjectContextProvider>    
                     </ExperienceContextProvider>

@@ -2,7 +2,7 @@ import DetailForm from "../Forms/detailForm"
 import '../../assets/styles/home.css'
 const Home: React.FC = () => {
     const onDownloadButtonClick = () => {
-        window.print()
+        window.print();
     }
     return (
         <>
