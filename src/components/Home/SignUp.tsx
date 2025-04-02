@@ -20,7 +20,7 @@ export default function SignupPage() {
 
   const onSubmit = async (data: SignupFormInputs) => {
     console.log(data);
-    const apiURL = import.meta.env.VITE_APP_API_URL;
+    const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL;
     
     try {
         const response = await fetch(apiURL, {
