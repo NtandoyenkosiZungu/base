@@ -170,7 +170,7 @@ export const Experience : React.FC<experienceProps> =({workplace, role, startDat
           <input type="text" name="end-date" id="end-date" value={endDate} onChange={(e)=> updateExperience(index, 'endDate', e.target.value)}/>
         </span>
       </div>
-      <span>
+      <span style={{paddingBottom: "40px"}}>
         <TextEditor 
           label="Description"
           content={description} 
@@ -234,7 +234,7 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
       </button>
      </div>
 
-      <span>
+      <span style={{paddingBottom: "40px"}}>
         <TextEditor 
           label="Description"
           content={description} 
@@ -331,7 +331,7 @@ interface AchievementProps {
 export const Achievement: React.FC<AchievementProps> = ({achievement, index, updateAchievementEntry, removeAchievementEntry}) => {
   return (
     <DropdownContent2 title={'Achievements'} index={index} removeEntry={removeAchievementEntry}>
-        <span>
+        <span style={{paddingBottom: "40px"}}>
             <TextEditor
               label="Achievements"
               content={achievement}
@@ -354,7 +354,7 @@ interface TechnicalSkillsProps{
 export const TechnicalSkill: React.FC<TechnicalSkillsProps> = ({index, skill, updateSkillEntry, removeSkillEntry}) => {
   return(
     <DropdownContent2 title={"Technicall Skills"} index={index} removeEntry={removeSkillEntry}>
-      <span>
+      <span style={{paddingBottom: "40px"}}>
         <TextEditor  
           label="Technical Skills"
           content={skill}
@@ -377,7 +377,7 @@ interface SoftSKillProps{
 export const SoftSkill: React.FC<SoftSKillProps> = ({index, skill, updateSkillEntry, removeSkillEntry}) => {
   return(
     <DropdownContent2 title={"Technicall Skills"} index={index} removeEntry={removeSkillEntry}>
-      <span>
+      <span style={{paddingBottom: "40px"}}>
         <TextEditor  
           label="Soft Skills"
           content={skill}

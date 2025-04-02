@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import {EducationFunctionContext} from "../../Contexts/EducationContext";
 import { ExperienceContext } from "../../Contexts/ExperienceContext";
-import { Education, Experience, Project, References, Dropdown, Certification, Achievement, TechnicalSkill } from "./SubFormComponents";
+import { Education, Experience, Project, References, Dropdown, Certification, Achievement, TechnicalSkill, SoftSkill } from "./SubFormComponents";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import { ReferenceContext } from "../../Contexts/ReferenceContext";
 import { CertificationContext } from "../../Contexts/CertificationContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
 import { TechnicalSkillsContext } from "../../Contexts/TechnicalSkillsContext";
+import { SoftSkillContext } from "../../Contexts/SoftSkillsContext";
 
 
 export const EducationDetails: React.FC = () => {
@@ -259,4 +260,27 @@ export const TechnicalSkillDetails: React.FC = () => {
       <button className="button-6" onClick={addTechnicalSkillEntry}>Add Technical Skill</button>
    </Dropdown>
   )
+}
+
+export const SoftSkillDetails: React.FC = () => {
+  const context = useContext(SoftSkillContext);
+  if (!context) return null;
+  const {addSoftSkill, removeSoftSkill, updateSoftSkill, softSkillEntries} =context;
+  return (
+    <Dropdown title="Soft Skill">
+      {
+        softSkillEntries.map((entry, index)=> 
+          <SoftSkill 
+            key={index}
+            index={index}
+            skill={entry.skill}
+            updateSkillEntry={updateSoftSkill}
+            removeSkillEntry={removeSoftSkill}
+          />
+        )
+      }
+      <button className="button-6" onClick={addSoftSkill}>Add Soft Skill</button>
+    </Dropdown>
+  )
+  
 }

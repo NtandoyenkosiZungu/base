@@ -9,6 +9,7 @@ import { CertificationContext } from '../../Contexts/CertificationContext';
 import { ReferenceContext } from '../../Contexts/ReferenceContext';
 import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
 import { AchievementContext } from '../../Contexts/AchievementContext';
+import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
 
 export const TemplateOne: React.FC = () => {
 
@@ -44,6 +45,10 @@ export const TemplateOne: React.FC = () => {
     const achievementContext = useContext(AchievementContext);
     if (!achievementContext) return null;
     const {AchievementEntries} = achievementContext;
+
+    const softSkillContext = useContext(SoftSkillContext);
+    if (!softSkillContext) return null;
+    const {softSkillEntries} =softSkillContext;
 
     return (
         <div className='res-one' id="cv-template">
@@ -139,6 +144,19 @@ export const TemplateOne: React.FC = () => {
                 </ul>
             </div>
 
+            <hr className={softSkillEntries.length > 0 ? '': 'none-display'}/>
+            <div className={softSkillEntries.length > 0 ? '': 'none-display'}>
+                <div className="heading">
+                    SOFT SKILLS
+                </div>
+                <ul style={{marginLeft: "-5%"}}>
+                    {
+                        softSkillEntries.map((entry, index) =>
+                            <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}} />
+                        )
+                    }
+                </ul>
+            </div>
 
             <hr className={projectEntries.length > 0 ? "" : 'none-display'}/>
 
