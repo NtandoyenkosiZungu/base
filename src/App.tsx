@@ -3,25 +3,31 @@ import Home from './components/Home/Home';
 import LoginPage from './components/Home/LogIn';
 import './App.css';
 import SignupPage from './components/Home/SignUp';
+import { PrivateRoutes } from './components/Home/ProtectedRoute';
+import { AuthContextProvider } from './Contexts/auth/AuthContext';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Route for the login page */}
-        <Route path="/" element={<LoginPage />} />
+    <AuthContextProvider>
+      <Router>
+        <Routes>
+          {/* Route for the login page */}
+          <Route path="/" element={<LoginPage />} />
 
-        <Route path='/login' element= {<LoginPage/>}/>
+          <Route path='/login' element= {<LoginPage/>}/>
 
-        {/*Route for the sign up page*/}
-        <Route path='/signup' element={<SignupPage/>}/>
+          {/*Route for the sign up page*/}
+          <Route path='/signup' element={<SignupPage/>}/>
 
-        {/* Route for the home page */}
-        <Route path="/home" element={<Home />} />
+          {/* Route for the home page */}
+          <Route element={<PrivateRoutes/>}>
+            <Route path="/home" element={<Home />} />
+          </Route>
 
-        {/* Add future routes here */}
-      </Routes>
-    </Router>
+          {/* Add future routes here */}
+        </Routes>
+      </Router>
+    </AuthContextProvider>
   );
 }
 

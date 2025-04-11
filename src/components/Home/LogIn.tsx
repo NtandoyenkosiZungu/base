@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
  
 import { auth } from "./firebase";  // Firebase import
 import { signInWithEmailAndPassword } from "firebase/auth"; // Firebase Authentication
 
 import "../../assets/styles/LoginPage.css"; // Importing the CSS file
+import { useAuth } from "../../Contexts/auth/AuthContext";
 
 interface LoginFormInputs {
   email: string;
@@ -22,18 +23,26 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const navigate = useNavigate();
+  const  {setToken} = useAuth();
 
-  const onSubmit = async (data: LoginFormInputs) => {
-    console.log("Login Data:", data);
-
+  useEffect (() => {
+    if (localStorage.getItem("authToken")){
+      navigate("/home")
+    }  
+  })
+  
+  const onSubmit = async (data: LoginFormInputs) => {         
     try {
       // Firebase authentication for sign in
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      
+      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+      const token = await userCredential.user.getIdToken();
+
+      setToken(token);
+      localStorage.setItem("authToken", token)
+
       // Redirect to a different page upon successful login
       // For example, redirect to the dashboard:
       // history.push("/dashboard");
-      console.log("Login successful");
       navigate("/home")
 
     } catch (error) {
