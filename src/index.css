@@ -1,4 +1,17 @@
+a {
+    color: blue;
+    text-decoration: none;
+}
 
+pre{
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+body{
+  overflow: hidden;
+}
 
 /* Style for WebKit-based browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
@@ -43,13 +56,13 @@
       position: unset;
     }
     /* Show only the .print-section */
-    .res-one,
-    .res-one * {
+    #cv-template,
+    #cv-template * {
       visibility: visible;
     }
   
     /* Position the print-section at the top-left to avoid whitespace */
-    .res-one {
+    #cv-template {
       position: absolute;
       left: 0;
       top: 0;
@@ -57,43 +70,3 @@
     }
   }
 
-
-.banner {
-    background-color: #f8f9fa;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-    padding-left: 50px;
-    margin-left: -10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-  .download-btn {
-
-    height: 40px;
-    margin-left: 68%;
-
-    background-color: #007bff; /* Blue color */
-    color: white; /* White text */
-    font-size: 16px; /* Readable font size */
-    font-weight: bold;
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding for a good button size */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.download-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight zoom effect */
-}
-
-.download-btn:active {
-    background-color: #00408a; /* Even darker blue when clicked */
-    transform: scale(0.98); /* Slight press effect */
-}

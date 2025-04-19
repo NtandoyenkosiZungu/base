@@ -1,0 +1,71 @@
+div.res-three{
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+
+
+    background-color: #FFFBFC;
+    max-height: fit-content;
+    min-height: 95%;
+    border-radius: 5px;
+
+    overflow: hidden;
+}
+
+div.description {
+    margin-top: -4%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+header.res-three-header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header.res-three-header > h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+section > h3 {
+    display: flex;
+    align-items: center;
+}
+
+section> h3 > div{
+    flex-grow: 1;
+    border-bottom: 2px solid black;
+    margin-top: 8px;
+}
+
+section p{
+    font-size: 1rem;
+}
+
+div.res-three-education-item > span{
+    display: grid;
+    grid-template-columns: 50% 48%;
+}
+
+div.res-three-education-item > span > p.institution{
+    text-align: start;
+}
+div.res-three-education-item > span > p.duration {
+    text-align: end;
+}
+
+div.res-three-certification-item > span{
+    display: grid;
+    grid-template-columns: 65% 30%;
+}
+
+div.res-three-certification-item > span > p.institution{
+    text-align: start;
+}
+div.res-three-certification-item > span > p.duration {
+    text-align: end;
+}
+

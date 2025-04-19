@@ -61,7 +61,7 @@ export const TemplateOne: React.FC = () => {
                    <ul>
                     <li>{address.length > 0 ? address : 'City, Name, Zip'}</li>
                     <li>{phone.length > 0 ?  (phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
-                    <li>{email.length > 0 ? '': 'info@example.com'} <a className={email.length > 0 ? '': 'none-display'} href={"mailto:"+email}>{email}</a></li>
+                    <li>{email.length > 0 ? '': 'info@example.com'} <a className={email.length > 0 ? '': 'none-display'} style={{color: 'black'}} href={"mailto:"+email}>{email}</a></li>
                    </ul>
                 </span>
             </div>
@@ -229,7 +229,7 @@ interface educationprops{
 const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, location, level, field, startDate, endDate}) => {
     //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
     let duration = "Duration"
-    if (endDate != 'Present' && endDate != 'Incomplete') {
+    if (endDate != 'Present' && endDate != 'Ongoing' && endDate != 'Incomplete') {
         duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-5);
     } else {
         duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate;
@@ -299,7 +299,7 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <p>{project} | <a href={link} target='_blank'>LINK</a></p>
+                    <p>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></p>
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
@@ -307,7 +307,7 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
                 <div dangerouslySetInnerHTML={{__html: description}} />
             </div>
             <div className="tools">
-                <p>Tools: {tools.join(', ')}</p>
+                <p><b>Tools</b>: {tools.join(', ')}</p>
             </div>
         </>
     )

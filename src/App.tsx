@@ -5,10 +5,12 @@ import './App.css';
 import SignupPage from './components/Home/SignUp';
 import { PrivateRoutes } from './components/Home/ProtectedRoute';
 import { AuthContextProvider } from './Contexts/auth/AuthContext';
+import { TemplateGalleryProvider } from './Contexts/templateGalleryContext';
 
 function App() {
   return (
     <AuthContextProvider>
+      <TemplateGalleryProvider>
       <Router>
         <Routes>
           {/* Route for the login page */}
@@ -27,6 +29,7 @@ function App() {
           {/* Add future routes here */}
         </Routes>
       </Router>
+      </TemplateGalleryProvider>
     </AuthContextProvider>
   );
 }

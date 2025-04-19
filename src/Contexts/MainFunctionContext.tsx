@@ -29,7 +29,7 @@ export function MainContextProvider({children}: MainProps){
                                    <AchievementContextProvider>
                                         <TechnicalSkillsContextProvider>
                                             <SoftSkillContextProvider>
-                                            {children}
+                                                {children}
                                             </SoftSkillContextProvider>
                                         </TechnicalSkillsContextProvider>
                                    </AchievementContextProvider>
