@@ -80,7 +80,7 @@ export const TemplateTwo: React.FC = () => {
                         <h4>{entry.workplace}</h4>
                         <p>{entry.role}</p>
                         <p>{entry.startDate} - {entry.endDate}</p>
-                        <p>{entry.description}</p>
+                        <div className='description' dangerouslySetInnerHTML={{__html: entry.description}}></div>
                     </div>
                 ))}
             </section>
