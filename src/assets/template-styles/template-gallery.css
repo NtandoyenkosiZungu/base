@@ -33,7 +33,7 @@ div.template-items{
     border: 3px solid black;
 
     display: grid;
-    grid-template-columns: 250px 250px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 
     overflow-y: auto;
