@@ -51,7 +51,7 @@ export const PersonalDetails: React.FC = () => {
     return null; // Return early if no context is available.
   }
 
-  const { name, setName, surname, setSurname, email, setEmail, phone, setPhone, address, setAddress, role, setRole, summary, setSummary} = context;
+  const { name, setName, surname, setSurname, email, setEmail, phone, setPhone, address, setAddress, role, setRole, summary, setSummary, github, setGithub, linkedin, setLinkedin} = context;
   
 
   const toogleDropdown = () => {
@@ -78,6 +78,14 @@ export const PersonalDetails: React.FC = () => {
           <span>
             <label htmlFor="phone">Phone</label>
             <input type="tel" name="phone" id="phone" value={phone} onChange={e => setPhone(e.target.value)}/>
+          </span>
+          <span>
+            <label htmlFor="linkedin">LinkedIn</label>
+            <input type="text" name="linkedin" id="linkedin" value={linkedin} onChange={e => setLinkedin(e.target.value)}/>
+          </span>
+          <span>
+            <label htmlFor="github">GitHub</label>
+            <input type="text" name="github" id="github" value={github} onChange={e => setGithub(e.target.value)}/>
           </span>
           <span>
             <label htmlFor="address">Address</label>

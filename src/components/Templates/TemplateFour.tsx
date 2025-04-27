@@ -1,0 +1,158 @@
+import '../../assets/template-styles/template-four.css'
+
+import React, { useContext } from 'react'
+import { PersonalDetailsContext } from '../../Contexts/PersonalDetailsContext';
+import { EducationFunctionContext } from '../../Contexts/EducationContext';
+import { ExperienceContext } from '../../Contexts/ExperienceContext';
+import { ProjectContext } from '../../Contexts/ProjectContext';
+import { CertificationContext } from '../../Contexts/CertificationContext';
+import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
+import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
+
+
+
+export const TemplateFour: React.FC = () => {
+
+    const personalContext = useContext(PersonalDetailsContext);
+    if (!personalContext) return null;
+    const {name, surname, address, phone, email, role, summary, linkedin, github} = personalContext;
+
+    const educationContext = useContext(EducationFunctionContext);
+    if (!educationContext) return null;
+    const {educationEntries} = educationContext;
+
+    const experienceContext = useContext(ExperienceContext);
+    if (!experienceContext) return null;
+    const {experienceEntries} = experienceContext;  
+
+    const projectContext = useContext(ProjectContext);
+    if (!projectContext) return null;
+    const {projectEntries} = projectContext;
+
+    const certificationContext = useContext(CertificationContext);  
+    if (!certificationContext) return null;
+    const {CertificationEntries} = certificationContext;
+
+    const softSkillContext = useContext(SoftSkillContext);
+    if (!softSkillContext) return null;
+    const {softSkillEntries} = softSkillContext;
+
+    const technicalSkillContext = useContext(TechnicalSkillsContext);
+    if (!technicalSkillContext) return null;
+    const {TechnicalSkillEntries} = technicalSkillContext;
+
+    return (
+        <div className='template-four' id='cv-template'>
+            <section className='template-four-header'>
+                <h1>{name} {surname}</h1>
+                <h3>{role}</h3>
+            </section>
+            <section className='template-four-body-personal-details'>
+                <div className='template-four-body-personal-details-left'>
+                    <h3>Contact Details</h3>
+                    <p>{address}</p>
+                    <p>
+                        <a href={`tel:${phone}`}>{phone}</a>
+                    </p>
+                    <p>
+                        <a href={`mailto:${email}`}>{email}</a>
+                    </p>
+                    <p>
+                        <a href={linkedin}>LinkedIn</a>
+                    </p>
+                    <p>
+                        <a href={github}>GitHub</a>
+                    </p>
+                </div>
+                <div className='template-four-body-personal-details-right'>
+                    <h3>Summary</h3>
+                    <pre>
+                        {summary}
+                    </pre>
+                </div>
+            </section>
+            <section className='template-four-body-education'>
+                <div className='template-four-body-education-left'>
+                    <div className='holder'>
+                        <h3>Education</h3>
+                        {
+                            educationEntries.map((entry, index) => (
+                                <div key={index}>
+                                    <h4>{entry.institution}</h4>
+                                    <p>
+                                        <i>{entry.start_date} - {entry.end_date}</i>
+                                    </p>
+                                    <p>
+                                        <i>{entry.level} in {entry.field}</i>
+                                    </p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className='holder'>
+                        <h3>Certifications</h3>
+                        {
+                            CertificationEntries.map((entry, index) => (
+                                <div key={index}>
+                                    <h4>{entry.provider}</h4>
+                                    <p>
+                                        <i>{entry.title}</i>
+                                    </p>
+                                    <p>
+                                        <i>{entry.date}</i>
+                                    </p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className='holder'>
+                        <h3>Technical Skills</h3>
+                        {
+                           TechnicalSkillEntries.map((entry, index) => (
+                            <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
+                           ))
+                        }
+                    </div>
+                    <div>
+                        <h3>Soft Skills</h3>
+                        {
+                            softSkillEntries.map((entry, index) => (
+                                <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className='template-four-body-education-right'>
+                    <div>
+                        <h3>Experience</h3>
+                        {
+                            experienceEntries.map((entry, index) => (
+                                <div key={index}>
+                                    <p>{entry.workplace}</p>
+                                    <p>{entry.startDate} - {entry.endDate}</p>
+                                    <p>{entry.description}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className='holder'>
+                        <h3>Projects</h3>
+                        {
+                            projectEntries.map((entry, index) => (
+                                <div key={index}>
+                                    <p>{entry.project}</p>
+                                    <p>{entry.description}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    
+                </div>
+            </section>
+        </div>
+    )
+    
+    
+
+}
+

@@ -9,6 +9,8 @@ interface PersonalDetailsContextType {
   address: string;
   role: string;  
   summary: string,
+  linkedin: string;
+  github: string;
 
   setName: (name: string) => void;
   setSurname: (surname: string) => void;
@@ -17,6 +19,8 @@ interface PersonalDetailsContextType {
   setAddress: (address: string) => void;
   setRole: (role: string) => void;  
   setSummary: (summary: string) => void;
+  setLinkedin: (linkedin: string) => void;
+  setGithub: (github: string) => void;
 }
 
 // Create the context with a default value
@@ -36,6 +40,8 @@ export function PersonalDetailsContextProvider({ children }: PersonalDetailsCont
   const [address, setAddress] = useState<string>("");
   const [role, setRole] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
+  const [linkedin, setLinkedin] = useState<string>("");
+  const [github, setGithub] = useState<string>("");
 
   // Wrap the context value in an object
   const contextValue: PersonalDetailsContextType = {
@@ -52,7 +58,11 @@ export function PersonalDetailsContextProvider({ children }: PersonalDetailsCont
     role,
     setRole,
     summary,
-    setSummary
+    setSummary,
+    linkedin,
+    setLinkedin,
+    github,
+    setGithub,
   };
 
   return (

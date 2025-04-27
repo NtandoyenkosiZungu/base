@@ -8,6 +8,7 @@ import { TemplateGalleryContext } from '../../Contexts/templateGalleryContext';
 import { TemplateTwo } from '../Templates/TemplateTwo';
 import { TemplateThree } from '../Templates/TemplateThree';
 import { TemplateGallery } from '../Extra/TemplateGallery';
+import { TemplateFour } from '../Templates/TemplateFour';
 
 const DetailForm: React.FC = () => {
   const templateGalleryContext = useContext(TemplateGalleryContext);
@@ -39,10 +40,10 @@ const DetailForm: React.FC = () => {
 
         <div className='output-form'>
           {
-            template === 'Template-One' ? <TemplateOne /> :
+            template === 'Template-One' ? <TemplateFour /> :
             template === 'Template-Two' ? <TemplateTwo /> :
             template === 'Template-Three' ? <TemplateThree /> :
-            <TemplateOne />
+            <TemplateFour />
           }
         </div>
         <div>
