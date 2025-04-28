@@ -14,8 +14,17 @@
     font-size: 14px;
     font-weight: 500;
     color: #2D2C2C;
-
     margin-top: -10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.template-four img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    margin-top: 5px;
 }
 
 .template-four h3 {
@@ -74,10 +83,14 @@
 .template-four-body-personal-details-left {
     width: 100%;
     border-right: 1px solid #2D2C2C;
+    padding-right: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .template-four-body-personal-details-right {
-    width: 100%;
+    width: 90%;
+    padding-left: 10px;
 }
 
 
@@ -87,20 +100,20 @@
 
     display: grid;
     grid-template-columns: 40% 60%;
-    gap: 10px;
-    
-    
 }
 
 .template-four-body-education-left {
     width: 100%;
     border-right: 1px solid #2D2C2C;
+    padding-right: 10px;
+}
+
+.template-four-body-education-right {
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 10px;
 }
 
 .template-four-body-education-left  div.holder {
     border-bottom: 1px solid #2D2C2C;
 }
-
-
-
-

@@ -8,6 +8,9 @@ import { ProjectContext } from '../../Contexts/ProjectContext';
 import { CertificationContext } from '../../Contexts/CertificationContext';
 import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
 import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
+import { icons } from '../Extra/icons';
+
+
 
 
 
@@ -50,18 +53,25 @@ export const TemplateFour: React.FC = () => {
             <section className='template-four-body-personal-details'>
                 <div className='template-four-body-personal-details-left'>
                     <h3>Contact Details</h3>
-                    <p>{address}</p>
                     <p>
-                        <a href={`tel:${phone}`}>{phone}</a>
+                        <img src={icons.location} alt="location" />
+                        <span>{address}</span>
                     </p>
                     <p>
-                        <a href={`mailto:${email}`}>{email}</a>
+                        <img src={icons.phone} alt="phone" />
+                        <a href={`tel:${phone}`} target='_blank' rel='noopener noreferrer' style={{color: '#2D2C2C', cursor: 'pointer'}}>{phone}</a>
                     </p>
                     <p>
-                        <a href={linkedin}>LinkedIn</a>
+                        <img src={icons.email} alt="email" />
+                        <a href={`mailto:${email}`} target='_blank' rel='noopener noreferrer' style={{color: '#2D2C2C', cursor: 'pointer'}}>{email}</a>
                     </p>
                     <p>
-                        <a href={github}>GitHub</a>
+                        <img src={icons.linkedin} alt="linkedin" />
+                        <a href={linkedin} target='_blank' rel='noopener noreferrer' style={{color: '#2D2C2C', cursor: 'pointer'}}>{linkedin}</a>
+                    </p>
+                    <p>
+                        <img src={icons.github} alt="github" />
+                        <a href={github} target='_blank' rel='noopener noreferrer' style={{color: '#2D2C2C', cursor: 'pointer'}}>{github}</a>
                     </p>
                 </div>
                 <div className='template-four-body-personal-details-right'>
@@ -128,9 +138,9 @@ export const TemplateFour: React.FC = () => {
                         {
                             experienceEntries.map((entry, index) => (
                                 <div key={index}>
-                                    <p>{entry.workplace}</p>
+                                    <h4>{entry.workplace}, {entry.role}</h4>
                                     <p>{entry.startDate} - {entry.endDate}</p>
-                                    <p>{entry.description}</p>
+                                    <div dangerouslySetInnerHTML={{__html: entry.description}}></div>
                                 </div>
                             ))
                         }
