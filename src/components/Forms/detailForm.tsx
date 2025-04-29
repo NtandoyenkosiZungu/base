@@ -40,7 +40,7 @@ const DetailForm: React.FC = () => {
 
         <div className='output-form'>
           {
-            template === 'Template-One' ? <TemplateFour /> :
+            template === 'Template-One' ? <TemplateOne /> :
             template === 'Template-Two' ? <TemplateTwo /> :
             template === 'Template-Three' ? <TemplateThree /> :
             <TemplateFour />
