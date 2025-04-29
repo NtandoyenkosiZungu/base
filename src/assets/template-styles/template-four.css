@@ -1,4 +1,5 @@
 
+
 .template-four {
     background-color: #fff;
     border-radius: 10px;
@@ -10,7 +11,7 @@
     word-wrap: break-word;
 }
 
-.template-four p {
+.template-four p.visible {
     font-size: 14px;
     font-weight: 500;
     color: #2D2C2C;
@@ -93,6 +94,13 @@
     padding-left: 10px;
 }
 
+.template-four-body-personal-details-right pre {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2D2C2C;
+    margin-top: -10px;
+}
+
 
 .template-four-body-education {
     width: 100%;
@@ -104,16 +112,35 @@
 
 .template-four-body-education-left {
     width: 100%;
-    border-right: 1px solid #2D2C2C;
     padding-right: 10px;
+
+    border-right: 1px solid #2D2C2C;
+    border-bottom: 1px solid #2D2C2C;
 }
 
 .template-four-body-education-right {
     width: 90%;
     padding-left: 20px;
     padding-right: 10px;
+
+    border-bottom: 1px solid #2D2C2C;
 }
 
-.template-four-body-education-left  div.holder {
+.template-four-body-education-left  section.holder {
+    width: calc(100% + 10px);
+    padding-bottom: 10px;
     border-bottom: 1px solid #2D2C2C;
+}
+
+.template-four-body-education-left  section.holder:last-child {
+    border-bottom: none;
+}
+
+.template-four-body-education-left  section.holder > div {
+    padding-right: 10px;
+}
+
+
+.none-display {
+    display: none;
 }
