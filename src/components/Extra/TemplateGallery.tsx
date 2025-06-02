@@ -25,6 +25,7 @@ export const TemplateGallery: React.FC = () => {
                     <div className="template-item" onClick={()=> handleTemplateSelection("Template-One")}>Template 1</div>
                     <div className="template-item" onClick={()=> handleTemplateSelection("Template-Two")}>Template 2</div>
                     <div className="template-item" onClick={()=> handleTemplateSelection("Template-Three")}>Template 3</div>
+                    <div className="template-item" onClick={()=> handleTemplateSelection("Template-Four")}>Template 4</div>
                 </div>
             </div>
     );  

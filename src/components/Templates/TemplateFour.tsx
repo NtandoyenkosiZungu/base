@@ -14,7 +14,7 @@ import { icons } from '../Extra/icons';
 
 
 
-export const TemplateFour: React.FC = () => {
+const TemplateFour: React.FC = () => {
 
     const personalContext = useContext(PersonalDetailsContext);
     if (!personalContext) return null;
@@ -122,7 +122,7 @@ export const TemplateFour: React.FC = () => {
                         <h3>Technical Skills</h3>
                         {
                            TechnicalSkillEntries.map((entry, index) => (
-                            <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
+                            <div className='list-description' key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
                            ))
                         }
                     </section>
@@ -131,7 +131,7 @@ export const TemplateFour: React.FC = () => {
                         <h3>Soft Skills</h3>
                         {
                             softSkillEntries.map((entry, index) => (
-                                <div key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
+                                <div className='list-description' key={index} dangerouslySetInnerHTML={{__html: entry.skill}}></div>
                             ))
                         }
                     </section>
@@ -155,7 +155,7 @@ export const TemplateFour: React.FC = () => {
                             projectEntries.map((entry, index) => (
                                 <div key={index}>
                                     <h4 className='visible'>{entry.project} | <a href={entry.link} target='_blank' rel='noopener noreferrer' style={{color: '#2D2C2C', cursor: 'pointer'}}>LINK</a></h4>
-                                    <div dangerouslySetInnerHTML={{__html: entry.description}}></div>
+                                    <div className='description' dangerouslySetInnerHTML={{__html: entry.description}}></div>
                                 </div>
                             ))
                         }
@@ -169,4 +169,6 @@ export const TemplateFour: React.FC = () => {
     
 
 }
+
+export default TemplateFour;
 

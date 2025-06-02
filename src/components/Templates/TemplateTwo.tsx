@@ -10,12 +10,13 @@ import { ReferenceContext } from '../../Contexts/ReferenceContext';
 import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
 import { AchievementContext } from '../../Contexts/AchievementContext';
 import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
+import { icons } from '../Extra/icons';
 
-export const TemplateTwo: React.FC = () => {
+const TemplateTwo: React.FC = () => {
     // Retrieve data from contexts
     const personalContext = useContext(PersonalDetailsContext);
     if (!personalContext) return null;
-    const { name, surname, address, phone, email, role, summary } = personalContext;
+    const { name, surname, address, phone, email, role, summary, linkedin, github } = personalContext;
 
     const educationContext = useContext(EducationFunctionContext);
     if (!educationContext) return null;
@@ -54,7 +55,18 @@ export const TemplateTwo: React.FC = () => {
             <header className="res-two-header">
                 <h1>{name || "Name"} {surname || "Surname"}</h1>
                 <h2>{role || "Job Title"}</h2>
-                <p>{address || "City, State, Zip"} | {phone || "123-456-7890"} | <a href={"mailto:"+email} style={{color: 'grey'}}>{email || "info@example.com"}</a></p>
+                
+                <p> 
+                    <div className={address ? 'visible' : 'none-display'}><img src={icons.location} alt="location" /> {address}</div>
+                    <b className={address ? 'visible' : 'none-display'}>|</b>
+                    <div className={phone ? 'visible' : 'none-display'}><img src={icons.phone} alt="phone" /> <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: 'grey'}}>{phone}</a></div>
+                    <b className={phone ? 'visible' : 'none-display'}>|</b>
+                    <div className={email ? 'visible' : 'none-display'}><img src={icons.email} alt="email" /> <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: 'grey'}}>{email}</a>
+                    </div> <b className={linkedin || github ? 'visible' : 'none-display'}>|</b>
+                    <div className={linkedin ? 'visible' : 'none-display'}><img src={icons.linkedin} alt="linkedin" /> <a href={linkedin} target="_blank" rel="noopener noreferrer" style={{color: 'grey'}}>{linkedin}</a>
+                    </div><b className={github ? 'visible' : 'none-display'}>|</b>
+                    <div className={github ? 'visible' : 'none-display'}><img src={icons.github} alt="github" /> <a href={github} target="_blank" rel="noopener noreferrer" style={{color: 'grey'}}>{github}</a></div>
+                </p>
             </header>
 
             <section className={summary ? "res-two-section" : "none-display"}>
@@ -87,20 +99,19 @@ export const TemplateTwo: React.FC = () => {
 
             <section className={TechnicalSkillEntries.length > 0 ? "res-two-section" : "none-display"}>
                 <h3>Technical Skills</h3>
-                <ul>
-                    {TechnicalSkillEntries.map((entry, index) => (
-                        <li key={index}>{entry.skill}</li>
-                    ))}
-                </ul>
+            
+                {TechnicalSkillEntries.map((entry, index) => (
+                    <div dangerouslySetInnerHTML={{__html: entry.skill}} key={index} className="res-two-item"></div>
+                ))}
+                
             </section>
 
             <section className={softSkillEntries.length > 0 ? "res-two-section" : "none-display"}>
                 <h3>Soft Skills</h3>
-                <ul>
-                    {softSkillEntries.map((entry, index) => (
-                        <li key={index}>{entry.skill}</li>
-                    ))}
-                </ul>
+            
+                {softSkillEntries.map((entry, index) => (
+                    <div dangerouslySetInnerHTML={{__html: entry.skill}} key={index} className="res-two-item"></div>
+                ))}
             </section>
 
             <section className={projectEntries.length > 0 ? "res-two-section" : "none-display"}>
@@ -154,3 +165,5 @@ export const TemplateTwo: React.FC = () => {
         </div>
     );
 };
+
+export default TemplateTwo;

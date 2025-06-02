@@ -10,13 +10,13 @@ import { ReferenceContext } from '../../Contexts/ReferenceContext';
 import { TechnicalSkillsContext } from '../../Contexts/TechnicalSkillsContext';
 import { AchievementContext } from '../../Contexts/AchievementContext';
 import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
-
-export const TemplateOne: React.FC = () => {
+import { icons } from '../Extra/icons';
+const TemplateOne: React.FC = () => {
 
     //RETRIEVING THE STATE OF PersonalDetails through the Context API
     const personalContext = useContext(PersonalDetailsContext);
     if (!personalContext) return null;
-    const {name, surname, address, phone, email, role, summary} = personalContext;
+    const {name, surname, address, phone, email, role, summary, linkedin, github} = personalContext;
 
     const  educationContext= useContext(EducationFunctionContext);   
     if (!educationContext) return null;
@@ -58,11 +58,26 @@ export const TemplateOne: React.FC = () => {
                     <p className='title'>{role.length > 0? role: "Job Title"}</p>
                 </span>
                 <span className='res-one-personal-details'>
-                   <ul>
-                    <li>{address.length > 0 ? address : 'City, Name, Zip'}</li>
-                    <li>{phone.length > 0 ?  (phone.substring(0,3) + ' ' + phone.substring(3,6) + ' ' + phone.substring(6,10)) : '123-456-7890'}</li>
-                    <li>{email.length > 0 ? '': 'info@example.com'} <a className={email.length > 0 ? '': 'none-display'} style={{color: 'black'}} href={"mailto:"+email}>{email}</a></li>
-                   </ul>
+                    <p className={address.length > 0 ? 'visible': 'none-display'}>
+                        <img src={icons.location} alt="location" />
+                        {address}
+                    </p>
+                    <p className={phone.length > 0 ? 'visible': 'none-display'}>
+                        <img src={icons.phone} alt="phone" />
+                        <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{phone}</a>
+                    </p>
+                    <p className={email.length > 0 ? 'visible': 'none-display'}>
+                        <img src={icons.email} alt="email" />
+                        <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{email}</a>
+                    </p>
+                    <p className={linkedin.length > 0 ? 'visible': 'none-display'}>
+                        <img src={icons.linkedin} alt="linkedin" />
+                        <a href={linkedin} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{linkedin}</a>
+                    </p>
+                    <p className={github.length > 0 ? 'visible': 'none-display'}>
+                        <img src={icons.github} alt="github" />
+                        <a href={github} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{github}</a>
+                    </p>
                 </span>
             </div>
 
@@ -216,6 +231,8 @@ export const TemplateOne: React.FC = () => {
     )
 }
 
+export default TemplateOne;
+
 
 interface educationprops{
     institution: string,
@@ -239,7 +256,7 @@ const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, loc
             <div className='res-content'>
                 <span className='left-side'>
                     <p>{institution}</p>
-                    <p className='last-child'>{level + ' ' + field}</p>
+                    <p className='last-child'>{level + ' in ' + field}</p>
                 </span>
                 <span className='right-side'>
                     <p>{location}</p>
@@ -299,15 +316,12 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <p>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></p>
+                    <h3>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></h3>
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
                 Description
                 <div dangerouslySetInnerHTML={{__html: description}} />
-            </div>
-            <div className="tools">
-                <p><b>Tools</b>: {tools.join(', ')}</p>
             </div>
         </>
     )
@@ -360,8 +374,8 @@ const TemplateOneReferenceDetails: React.FC<referenceProps> = ({reference, role,
                     <p>{workplace}/{role}</p>
                 </div>
                 <div>
-                    <p>📞: {phone}</p>
-                    <p style={{marginTop:'-0.5rem'}}>📧: {email}</p>
+                    <p>📞: <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{phone}</a></p>
+                    <p style={{marginTop:'-0.5rem'}}>📧: <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{email}</a></p>
                 </div>
             </div>
         </>

@@ -1,14 +1,20 @@
 import '../../assets/styles/detail-form.css';
 import { EducationDetails, PersonalDetails, ExperienceDetails, ProjectDetails, ReferenceDetails, CertificationsDetails, AchievementDetails, TechnicalSkillDetails, SoftSkillDetails } from './SubForms';
-
-import { TemplateOne } from '../Templates/TemplateOne';
-import { MainContextProvider } from '../../Contexts/MainFunctionContext';
-import { useContext } from 'react';
+import { useContext, Suspense, lazy } from 'react';
 import { TemplateGalleryContext } from '../../Contexts/templateGalleryContext';
-import { TemplateTwo } from '../Templates/TemplateTwo';
-import { TemplateThree } from '../Templates/TemplateThree';
 import { TemplateGallery } from '../Extra/TemplateGallery';
-import { TemplateFour } from '../Templates/TemplateFour';
+
+// Lazy load template components
+const TemplateOne = lazy(() => import('../Templates/TemplateOne'));
+const TemplateTwo = lazy(() => import('../Templates/TemplateTwo'));
+const TemplateThree = lazy(() => import('../Templates/TemplateThree'));
+const TemplateFour = lazy(() => import('../Templates/TemplateFour'));
+
+// Loading fallback for templates
+const TemplateLoadingFallback = () => (
+  <div className='loader'>
+  </div>
+);
 
 const DetailForm: React.FC = () => {
   const templateGalleryContext = useContext(TemplateGalleryContext);
@@ -17,7 +23,6 @@ const DetailForm: React.FC = () => {
 
   return (
     <div className="detail-form">
-      <MainContextProvider>
         <div className='input-form'>
           <PersonalDetails />
           <hr />
@@ -39,19 +44,20 @@ const DetailForm: React.FC = () => {
         </div>
 
         <div className='output-form'>
-          {
-            template === 'Template-One' ? <TemplateOne /> :
-            template === 'Template-Two' ? <TemplateTwo /> :
-            template === 'Template-Three' ? <TemplateThree /> :
-            <TemplateFour />
-          }
+          <Suspense fallback={<TemplateLoadingFallback />}>
+            {template === 'Template-One' ? <TemplateOne /> :
+             template === 'Template-Two' ? <TemplateTwo /> :
+             template === 'Template-Three' ? <TemplateThree /> :
+             template === 'Template-Four' ? <TemplateFour /> :
+             <TemplateOne />
+            }
+          </Suspense>
         </div>
         <div>
           <TemplateGallery/>
         </div>
-      </MainContextProvider>
     </div>
   );
-};
+}
 
 export default DetailForm;

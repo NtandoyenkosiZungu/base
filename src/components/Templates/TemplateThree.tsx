@@ -10,12 +10,13 @@ import { CertificationContext } from '../../Contexts/CertificationContext';
 import { ProjectContext } from '../../Contexts/ProjectContext';
 import { SoftSkillContext } from '../../Contexts/SoftSkillsContext';
 import { ReferenceContext } from '../../Contexts/ReferenceContext';
+import { icons } from '../Extra/icons';
 
-export const TemplateThree: React.FC = () => {
+const TemplateThree: React.FC = () => {
     // Retrieve data from contexts
     const personalContext = useContext(PersonalDetailsContext);
     if (!personalContext) return null;
-    const { name, surname, address, phone, email, summary } = personalContext;
+    const { name, surname, address, phone, email, summary, linkedin, github } = personalContext;
 
     const educationContext = useContext(EducationFunctionContext);
     if (!educationContext) return null;
@@ -54,14 +55,24 @@ export const TemplateThree: React.FC = () => {
         <div className="res-three" id="cv-template">
            <header className="res-three-header">
                 <h1>{name || "Name"} {surname || "Surname"}</h1>
-                <p>{address || "Address"} | {phone || "Phone"} | <a href={"mailto:"+email} style={{color: '#333'}}>{email || "info@example.com"}</a></p>
+                <p> 
+                    <div className={address ? 'visible' : 'none-display'}><img src={icons.location} alt="location" /> {address}</div>
+                    <b className={address ? 'visible' : 'none-display'}>|</b>
+                    <div className={phone ? 'visible' : 'none-display'}><img src={icons.phone} alt="phone" /> <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{phone}</a></div>
+                    <b className={phone ? 'visible' : 'none-display'}>|</b>
+                    <div className={email ? 'visible' : 'none-display'}><img src={icons.email} alt="email" /> <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{email}</a>
+                    </div> <b className={linkedin || github ? 'visible' : 'none-display'}>|</b>
+                    <div className={linkedin ? 'visible' : 'none-display'}><img src={icons.linkedin} alt="linkedin" /> <a href={linkedin} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{linkedin}</a>
+                    </div><b className={github ? 'visible' : 'none-display'}>|</b>
+                    <div className={github ? 'visible' : 'none-display'}><img src={icons.github} alt="github" /> <a href={github} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{github}</a></div>
+                </p>
            </header>
 
            <section className={summary.length > 0 ? 'res-three-summary': 'none-display'}>
                 <h3>Summary <div></div></h3>
-                <pre>
+                <p>
                     {summary}
-                </pre>
+                </p>
            </section>
            <section className={educationEntries.length > 0 ? "res-three-section" : "none-display"}>
                 <h3>Education <div></div></h3>
@@ -163,3 +174,5 @@ export const TemplateThree: React.FC = () => {
         </div>
     );
 };
+
+export default TemplateThree;

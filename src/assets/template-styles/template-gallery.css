@@ -4,8 +4,10 @@ div.template-gallery, div.template-gallery{
     right: 0;
     top: 9%;
 
-    background-color: grey;
+    background-color: #0C0C0D;
+
     border-radius: 5px;
+    border-left: 4px double white;
     width: 45%;
     max-width: 0;
 
@@ -23,6 +25,12 @@ div.template-gallery, div.template-gallery{
 div.template-gallery.show{
     max-width: 45%;
     opacity: 1;
+}
+
+div.template-gallery h1{
+    color: white;
+    font-weight: bold;
+    margin: 20px 0;
 }
 
 div.template-items{
@@ -45,6 +53,7 @@ div.template-items > div {
     height: 350px;
     border-radius: 5px;
     transition: 0.5s;
+    cursor: pointer;
     &:hover {
         transform: scale(1.1, 1.1);
     }

@@ -4,7 +4,6 @@ div.res-three{
     padding: 20px;
     line-height: 1.6;
 
-
     background-color: #FFFBFC;
     max-height: fit-content;
     min-height: 95%;
@@ -12,6 +11,40 @@ div.res-three{
 
     overflow: hidden;
 }
+
+header.res-three-header > p{
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;    
+}
+header.res-three-header > p > div > img{
+    width: 15px;
+    height: 15px;
+}
+
+header.res-three-header > p > div{
+    display: none;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 2px;
+    padding-left: 2px;
+
+}
+
+header.res-three-header > p > div.visible{
+    display: flex;
+}
+
 
 div.description {
     margin-top: -4%;
