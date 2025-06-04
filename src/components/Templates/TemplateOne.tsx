@@ -280,9 +280,9 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
     //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
     let duration = "Duration"
     if (endDate!= 'Present') {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' -'+ endDate.substring(0,3) + endDate.substring(endDate.length-5);
+        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - '+ endDate.substring(0,3) + endDate.substring(endDate.length-5);
     } else {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) +'-'+ endDate.substring(0,3) + endDate.substring(endDate.length-4);
+        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) +' - '+ endDate.substring(0,3) + endDate.substring(endDate.length-4);
     }
     return (
         <>
@@ -296,7 +296,6 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
-                Description
                 <div dangerouslySetInnerHTML={{__html: description}}/>
             </div>
         </>
@@ -316,12 +315,19 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <h3>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></h3>
+                    <p className='project-name'>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></p>
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
-                Description
                 <div dangerouslySetInnerHTML={{__html: description}} />
+            </div>
+            <div className={tools.length > 0? 'tools' : 'none-display'}>
+                <span>Tools: </span>
+                {
+                    tools.map((tools, index) =>
+                        <span key={index}>{tools} | </span>
+                    )
+                }
             </div>
         </>
     )
@@ -374,8 +380,8 @@ const TemplateOneReferenceDetails: React.FC<referenceProps> = ({reference, role,
                     <p>{workplace}/{role}</p>
                 </div>
                 <div>
-                    <p>📞: <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{phone}</a></p>
-                    <p style={{marginTop:'-0.5rem'}}>📧: <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{email}</a></p>
+                    <p><img src={icons.phone} alt="phone" />: <a href={"tel:"+phone} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{phone}</a></p>
+                    <p style={{marginTop:'-0.5rem'}}><img src={icons.email} alt="email"/>: <a href={"mailto:"+email} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{email}</a></p>
                 </div>
             </div>
         </>

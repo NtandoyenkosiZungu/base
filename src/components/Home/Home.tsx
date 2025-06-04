@@ -122,7 +122,7 @@ const Home: React.FC = () => {
     return (
         <>
             <div className="banner">
-                <h1>Welcome to Jobify</h1>
+                <h1>HiResume</h1>
                <div className="banner-btns">
                     <button className="download-btn"  onClick={()=> handleOpenGallery()}>Templates</button>
                     <button onClick={onDownloadButtonClick} className="download-btn">Download</button>
