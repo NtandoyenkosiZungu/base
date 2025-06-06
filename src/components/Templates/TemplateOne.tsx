@@ -72,7 +72,7 @@ const TemplateOne: React.FC = () => {
                     </p>
                     <p className={linkedin.length > 0 ? 'visible': 'none-display'}>
                         <img src={icons.linkedin} alt="linkedin" />
-                        <a href={linkedin} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{linkedin}</a>
+                        <a href={`${linkedin}`} target="_blank" rel="noopener noreferrer" style={{color: '#333'}}>{linkedin}</a>
                     </p>
                     <p className={github.length > 0 ? 'visible': 'none-display'}>
                         <img src={icons.github} alt="github" />
@@ -245,12 +245,6 @@ interface educationprops{
 
 const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, location, level, field, startDate, endDate}) => {
     //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
-    let duration = "Duration"
-    if (endDate != 'Present' && endDate != 'Ongoing' && endDate != 'Incomplete') {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate.substring(0,3) + endDate.substring(endDate.length-5);
-    } else {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - ' + endDate;
-    }
     return (
         <>
             <div className='res-content'>
@@ -260,7 +254,7 @@ const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, loc
                 </span>
                 <span className='right-side'>
                     <p>{location}</p>
-                    <p className='last-child'>{duration}</p>
+                    <p className='last-child'>{startDate} - {endDate}</p>
                 </span>
             </div>
         </>
@@ -278,12 +272,7 @@ interface experienceProps {
 
 const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role, startDate, endDate, description}) => {
     //FORMAT THE DURATION - Jan 2024 - Present or Jan 2024 - Dec 2024
-    let duration = "Duration"
-    if (endDate!= 'Present') {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) + ' - '+ endDate.substring(0,3) + endDate.substring(endDate.length-5);
-    } else {
-        duration = startDate.substring(0,3)+ startDate.substring(startDate.length-5) +' - '+ endDate.substring(0,3) + endDate.substring(endDate.length-4);
-    }
+
     return (
         <>
             <div className='res-content'>
@@ -292,7 +281,7 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
                     <p className='last-child'>{role}</p>
                 </span>
                 <span className='right-side'>
-                    <p>{duration}</p>
+                    <p>{startDate} - {endDate}</p>
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
@@ -345,7 +334,7 @@ const TemplateOneCertificationDetails: React.FC<CertificationProps> = ({title, p
         <>
             <div className='res-content' style={{display:'grid', gridTemplateColumns: '1.5fr 1fr'}}>
                 <span className='left-side'>
-                    <p>{provider} | <b>{title}</b> </p>
+                    <p>{provider} | {title} </p>
                 </span>
                 <span className='right-side'>
                     <p>{date}</p>

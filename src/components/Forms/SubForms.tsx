@@ -80,11 +80,11 @@ export const PersonalDetails: React.FC = () => {
             <input type="tel" name="phone" id="phone" value={phone} onChange={e => setPhone(e.target.value)}/>
           </span>
           <span>
-            <label htmlFor="linkedin">LinkedIn</label>
+            <label htmlFor="linkedin">LinkedIn Username</label>
             <input type="text" name="linkedin" id="linkedin" value={linkedin} onChange={e => setLinkedin(e.target.value)}/>
           </span>
           <span>
-            <label htmlFor="github">GitHub</label>
+            <label htmlFor="github">GitHub Username</label>
             <input type="text" name="github" id="github" value={github} onChange={e => setGithub(e.target.value)}/>
           </span>
           <span>
