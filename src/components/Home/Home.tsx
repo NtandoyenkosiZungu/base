@@ -89,7 +89,8 @@ const Home: React.FC = () => {
 
     const onDownloadButtonClick = () => {
         //console.log(allData);
-        fetch('http://localhost:5000/download-resume', {
+        const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL
+        fetch(`${apiURL}/download-resume`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
