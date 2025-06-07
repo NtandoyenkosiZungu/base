@@ -100,6 +100,7 @@ const Home: React.FC = () => {
         .then((response) => {
             // Check if the response is successful
             if (!response.ok) {
+                console.log(response)
                 throw new Error('Failed to generate PDF');
             }
             return response.blob();
