@@ -139,7 +139,7 @@ const Home: React.FC = () => {
                 <h1>HiResume</h1>
                <div className="banner-btns">
                     <button className="download-btn"  onClick={()=> handleOpenGallery()}>Template</button>
-                    <button onClick={onDownloadButtonClick} className="download-btn">
+                    <button onClick={onDownloadButtonClick} className="download-btn" disabled = {downloadStatus}>
                         {
                             downloadStatus == false ? <span>Donwload</span> :  <div className="loader"></div>
                         }

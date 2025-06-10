@@ -66,9 +66,14 @@ const DropdownContent: React.FC<DropdownContentProps> = ({ title, children, inde
 
 export const DropdownContent2: React.FC<DropdownContentProps> = ({ title, children, index, removeEntry }) =>{
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+
+
   return (
     <div className="dropdown" style={{alignSelf: 'center'}}>
       <div className="btn-container">
@@ -79,6 +84,10 @@ export const DropdownContent2: React.FC<DropdownContentProps> = ({ title, childr
       </div>
       <div className={`dropdown-content-v2 ${isOpen? "show" : ""}`}>
         {children}
+
+        {
+          
+        }
       </div>
     </div>
   )
