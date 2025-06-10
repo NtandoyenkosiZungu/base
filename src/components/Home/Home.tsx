@@ -1,7 +1,7 @@
 import DetailForm from "../Forms/detailForm"
 import '../../assets/styles/home.css'
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TemplateGalleryContext } from "../../Contexts/templateGalleryContext"
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import { EducationFunctionContext } from "../../Contexts/EducationContext";
@@ -16,6 +16,9 @@ import { AchievementContext } from "../../Contexts/AchievementContext";
 
 
 const Home: React.FC = () => {
+
+    const [downloadStatus, setDownloadStatus] = useState<boolean>(false);
+
     const templateGalleryContext = useContext(TemplateGalleryContext)
     if (!templateGalleryContext) return null;
     const {setIsTemplateGalleryOpen, isTemplateGalleryOpen} = templateGalleryContext;
@@ -89,6 +92,7 @@ const Home: React.FC = () => {
 
     const onDownloadButtonClick = () => {
         //console.log(allData);
+        setDownloadStatus(true);
         const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL
         fetch(`${apiURL}/download-resume`, {
             method: 'POST',
@@ -114,10 +118,18 @@ const Home: React.FC = () => {
             a.click();
             a.remove();
             window.URL.revokeObjectURL(url);
+            
+            //Set downlaod status to false, signalling completion of the server request
+            setDownloadStatus(false);
         })
         .catch((error) => {
+
+
             console.error('Error:', error);
             alert('There was an issue generating your resume.');
+
+            //Set downlaod status to false, signalling completion of the server request
+            setDownloadStatus(false);
         });
     }
     
@@ -126,8 +138,12 @@ const Home: React.FC = () => {
             <div className="banner">
                 <h1>HiResume</h1>
                <div className="banner-btns">
-                    <button className="download-btn"  onClick={()=> handleOpenGallery()}>Templates</button>
-                    <button onClick={onDownloadButtonClick} className="download-btn">Download</button>
+                    <button className="download-btn"  onClick={()=> handleOpenGallery()}>Template</button>
+                    <button onClick={onDownloadButtonClick} className="download-btn">
+                        {
+                            downloadStatus == false ? <span>Donwload</span> :  <div className="loader"></div>
+                        }
+                    </button>
                </div>
                <div className="account-info">
                 
