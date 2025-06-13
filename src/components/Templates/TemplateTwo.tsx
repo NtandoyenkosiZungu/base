@@ -80,7 +80,7 @@ const TemplateTwo: React.FC = () => {
                     <div key={index} className="res-two-item">
                         <h4>{entry.institution}</h4>
                         <p>{entry.level} in {entry.field}</p>
-                        <p>{entry.start_date} - {entry.end_date}</p>
+                        <p style={{marginTop: '-20px'}}>{entry.start_date} - {entry.end_date}</p>
                     </div>
                 ))}
             </section>
@@ -88,10 +88,10 @@ const TemplateTwo: React.FC = () => {
             <section className={experienceEntries.length > 0 ? "res-two-section" : "none-display"}>
                 <h3>Experience</h3>
                 {experienceEntries.map((entry, index) => (
-                    <div key={index} className="res-two-item">
+                    <div key={index} className="res-two-item" style={{marginBottom: '-20px'}}>
                         <h4>{entry.workplace}</h4>
                         <p>{entry.role}</p>
-                        <p>{entry.startDate} - {entry.endDate}</p>
+                        <p style={{marginTop: '-20px'}}>{entry.startDate} - {entry.endDate}</p>
                         <div className='description' dangerouslySetInnerHTML={{__html: entry.description}}></div>
                     </div>
                 ))}
@@ -118,7 +118,7 @@ const TemplateTwo: React.FC = () => {
                 <h3>Projects</h3>
                 {projectEntries.map((entry, index) => (
                     <div key={index} className="res-two-item">
-                        <span className='project-heading'>
+                        <span className='project-heading' style={{marginBottom: "15px"}}>
                             <h4> {entry.project}</h4>
 
                             <strong className={entry.link.length > 0? '': 'none-display'}>|</strong>
@@ -127,7 +127,18 @@ const TemplateTwo: React.FC = () => {
                                 <a href={entry.link} className={entry.link.length > 0? '': 'none-display'} target="_blank"  rel="noopener noreferrer">LINK</a>
                             </h4>
                         </span>
-                        <div dangerouslySetInnerHTML={{__html: entry.description}}></div>
+                        <div className='description' dangerouslySetInnerHTML={{__html: entry.description}}></div>
+                        <div className='tool-list'>
+                            <span><b>Tools: </b></span>
+                            {
+                                entry.tools.map((tool: string, index: number) => (
+                                    <span key={index}>
+                                        {tool}
+                                        {index < entry.tools.length - 1 ? ' | ' : ''}
+                                    </span>
+                                ))
+                            }
+                        </div>
                     </div>
                 ))}
             </section>
@@ -157,8 +168,12 @@ const TemplateTwo: React.FC = () => {
                 {referenceEntries.map((entry, index) => (
                     <div key={index} className="res-two-item">
                         <p>{entry.reference}</p>
-                        <p>{entry.role} at {entry.workplace}</p>
-                        <p>{entry.phone} | {entry.email}</p>
+                        <p style={{marginTop: '-20px'}}>
+                            {entry.role} at {entry.workplace}
+                        </p>
+                        <p style={{marginTop: '-15px'}}>
+                            {entry.phone} | {entry.email}
+                        </p>
                     </div>
                 ))}
             </section>

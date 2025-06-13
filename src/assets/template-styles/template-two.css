@@ -33,23 +33,33 @@
 }
 
 .res-two-section {
-    margin-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.res-two-section .res-two-item:last-child {
+    margin-bottom: -10px;
 }
 
 .res-two-section h3 {
-    font-size: 1.25rem;
-    color: #444;
+    font-size: 1.15rem;
+    /*color: #444;*/
     border-bottom: 2px solid #ddd;
     padding-bottom: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .res-two-item {
     margin-bottom: 10px;
 }
 
+.res-two-item p {
+    margin-top: -5px;
+}
+
 .res-two-item h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
     margin: 0;
 }
 
@@ -76,6 +86,7 @@ header.res-two-header > p{
     align-items: center;
     justify-content: center;    
 }
+
 header.res-two-header > p > div > img{
     width: 15px;
     height: 15px;
@@ -95,3 +106,9 @@ header.res-two-header > p > div{
 header.res-two-header > p > div.visible{
     display: flex;
 }
+
+.description {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin-bottom: -10px;
+} 
