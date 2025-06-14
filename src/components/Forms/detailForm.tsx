@@ -19,7 +19,10 @@ const TemplateLoadingFallback = () => (
 const DetailForm: React.FC = () => {
   const templateGalleryContext = useContext(TemplateGalleryContext);
   if (!templateGalleryContext) return null;
-  const { template } = templateGalleryContext;
+  const { template, setTemplate } = templateGalleryContext;
+
+  setTemplate(localStorage.getItem('template') || 'Template-One');
+  // Set default template if not already set 
 
   return (
     <div className="detail-form">

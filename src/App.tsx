@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import './App.css';
 import { PrivateRoutes } from './components/Home/ProtectedRoute';
 import { AuthContextProvider } from './Contexts/auth/AuthContext';
@@ -26,6 +26,12 @@ const LoadingFallback = () => (
 );
 
 function App() {
+
+  useEffect(() => {
+    const defaultTemplate = localStorage.getItem('template') || 'Template-One';
+    localStorage.setItem('template', defaultTemplate);
+  }, []);
+
   return (
     <MainContextProvider>
     <AuthContextProvider>
