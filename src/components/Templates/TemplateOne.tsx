@@ -249,7 +249,9 @@ const TemplateOneEducationDetails: React.FC<educationprops> = ({institution, loc
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <p>{institution}</p>
+                    <p>
+                        <b>{institution}</b>
+                    </p>
                     <p className='last-child'>{level + ' in ' + field}</p>
                 </span>
                 <span className='right-side'>
@@ -277,7 +279,9 @@ const TemplateOneExperienceDetails: React.FC<experienceProps> = ({workplace,role
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <p>{workplace}</p>
+                    <p>
+                        <b>{workplace}</b>
+                    </p>
                     <p className='last-child'>{role}</p>
                 </span>
                 <span className='right-side'>
@@ -304,14 +308,16 @@ const TemplateOneProjectDetails: React.FC<projectProps> = ({project, link, tools
         <>
             <div className='res-content'>
                 <span className='left-side'>
-                    <p className='project-name'>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></p>
+                    <b>
+                        <p className='project-name'>{project} | <a href={link} target='_blank'  className={link.length > 0? '':'none-display'}>LINK</a></p>
+                    </b>
                 </span>
             </div>
             <div className={description.length > 0 ? "description": 'none-display'} style={{marginTop: '0.5rem'}}>
                 <div dangerouslySetInnerHTML={{__html: description}} />
             </div>
             <div className={tools.length > 0? 'tools' : 'none-display'}>
-                <span>Tools: </span>
+                <span><b>Tools:</b> </span>
                 {
                     tools.map((tools, index) =>
                         <span key={index}>{tools} | </span>
@@ -334,7 +340,9 @@ const TemplateOneCertificationDetails: React.FC<CertificationProps> = ({title, p
         <>
             <div className='res-content' style={{display:'grid', gridTemplateColumns: '1.5fr 1fr'}}>
                 <span className='left-side'>
-                    <p>{provider} | {title} </p>
+                    <b>
+                        <p>{provider} | {title} </p>
+                    </b>
                 </span>
                 <span className='right-side'>
                     <p>{date}</p>

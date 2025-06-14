@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useNavigate } from "react-router-dom";
  
 import { auth } from "./firebase";  // Firebase import
@@ -25,11 +25,11 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const  {setToken} = useAuth();
 
-  useEffect (() => {
+  /* useEffect (() => {
     if (localStorage.getItem("authToken")){
       navigate("/home")
     }  
-  })
+  }) */
   
   const onSubmit = async (data: LoginFormInputs) => {         
     try {

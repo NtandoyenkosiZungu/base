@@ -42,19 +42,22 @@ div.banner {
     align-self: flex-end;
     gap: 20px; /* Space between buttons */
     margin-bottom: 10px;
-    margin-left: 55%; /* Space from the left */
+    margin-left: 52%;  /*Space from the left */
 
 }
-.download-btn {
+.download-btn, .account-info {
 
     height: 40px;
     width: 150px; /* Fixed width for the button */
+    gap: 10px; /* Space between image and text */
     margin: 0 auto; /* Center the button */
     margin-bottom: 5px; /* Space from the bottom */
 
     display: flex;
+    align-self: center;
     justify-content: center;
     align-items: center;
+
 
     background-color: #007bff; /* Blue color */
     color: white; /* White text */
@@ -67,22 +70,35 @@ div.banner {
     transition: background-color 0.3s, transform 0.2s;
 
     box-shadow: 0 5px 0 #00408a;
+
+    &:hover{
+        background-color: #0464ca; /* Darker blue on hover */
+        transform: scale(1.02); /* Slight zoom effect */
+    }
+
+    &:active {
+        background-color: #00408a; /* Even darker blue when clicked */
+        transform: scale(0.98); /* Slight press effect */
+        box-shadow: 0 0 0 #00408a; /* Remove shadow on click */
+        transition: background-color 0.1s, transform 0.1s;
+    }
 }
 
-.download-btn:hover {
-    background-color: #0464ca; /* Darker blue on hover */
-    transform: scale(1.02); /* Slight zoom effect */
+
+.account-info {
+    font-size: 14px;
 }
 
-.download-btn:active {
-    background-color: #00408a; /* Even darker blue when clicked */
-    transform: scale(0.98); /* Slight press effect */
-    box-shadow: 0 0 0 #00408a; /* Remove shadow on click */
-    transition: background-color 0.1s, transform 0.1s;
+.download-btn img {
+    width: 30px;
+    height: 30px;
 }
 
-
-
+.account-info img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
 
 
 /* HTML: <div class="loader"></div> */

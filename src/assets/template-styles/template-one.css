@@ -10,12 +10,16 @@ div.res-one {
     font-family: 'Arial', sans-serif;
 
     font-size: 14px;
-    font-weight: 700;
+   /* font-weight: 700;*/
 
     margin: 0;
     padding: 0;
     padding-bottom: 30px;
     color: #000;
+}
+
+.heading {
+    font-weight: 650;
 }
 
 span.res-one-personal-details {
@@ -115,6 +119,7 @@ div.res-content > span.right-side {
 
 div.description > div{
     margin-top: -20px;
+    font-size: 15px;
     /*font-size: 95%;*/
     font-weight: 500;
 }
@@ -124,6 +129,6 @@ div.tools {
     font-weight: 500;
 }
 
-div.res-content > span.left-side > p.project-name{
+div.res-content  span.left-side  p.project-name{
     font-size: 15.5px;
 }

@@ -1,7 +1,9 @@
 import DetailForm from "../Forms/detailForm"
 import '../../assets/styles/home.css'
 
-import React, { useContext, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth/cordova";
+
+import React, { useContext, useEffect, useState } from "react";
 import { TemplateGalleryContext } from "../../Contexts/templateGalleryContext"
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import { EducationFunctionContext } from "../../Contexts/EducationContext";
@@ -12,12 +14,15 @@ import { SoftSkillContext } from "../../Contexts/SoftSkillsContext";
 import { ReferenceContext } from "../../Contexts/ReferenceContext";
 import { TechnicalSkillsContext } from "../../Contexts/TechnicalSkillsContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
+import { icons } from "../Extra/icons";
 
 
 
 const Home: React.FC = () => {
 
+    const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL
     const [downloadStatus, setDownloadStatus] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>("username");
 
     const templateGalleryContext = useContext(TemplateGalleryContext)
     if (!templateGalleryContext) return null;
@@ -88,12 +93,24 @@ const Home: React.FC = () => {
         }
         
     }
+    
+    useEffect (() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, you can access user details
+                setUsername(user.displayName || "User");
+            } else {
+                // User is signed out
+                setUsername("Guest");
+            }
+        });
+    }, [])
 
 
     const onDownloadButtonClick = () => {
         //console.log(allData);
         setDownloadStatus(true);
-        const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL
         fetch(`${apiURL}/download-resume`, {
             method: 'POST',
             headers: {
@@ -123,8 +140,6 @@ const Home: React.FC = () => {
             setDownloadStatus(false);
         })
         .catch((error) => {
-
-
             console.error('Error:', error);
             alert('There was an issue generating your resume.');
 
@@ -138,16 +153,24 @@ const Home: React.FC = () => {
             <div className="banner">
                 <h1>HiResume</h1>
                <div className="banner-btns">
-                    <button className="download-btn"  onClick={()=> handleOpenGallery()}>Template</button>
+                    <button className="download-btn"  onClick={()=> handleOpenGallery()}>
+                        Template
+                        <img src={icons.res_template} alt="" />
+                    </button>
                     <button onClick={onDownloadButtonClick} className="download-btn" disabled = {downloadStatus}>
                         {
-                            downloadStatus == false ? <span>Donwload</span> :  <div className="loader"></div>
+                            downloadStatus == false ? "Download" : "Downloading"
+                        }
+                        {
+                            downloadStatus == false ?<img src={icons.download} alt="" /> :  <div className="loader"></div>
                         }
                     </button>
+                    <button className="account-info">
+                        {username}
+                        <img src={icons.account} alt="" />
+                    </button>
                </div>
-               <div className="account-info">
-                
-               </div>
+               
             </div>
             <DetailForm/>
         </>
