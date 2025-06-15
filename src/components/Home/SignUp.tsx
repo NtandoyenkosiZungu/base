@@ -54,6 +54,7 @@ export default function SignupPage() {
             throw new Error(resData.message || "Signup failed");
         }
 
+        setIsLoading(false);
         navigate("/home");
         
     }catch(error){

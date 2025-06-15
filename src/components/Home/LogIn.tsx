@@ -50,6 +50,7 @@ export default function LoginPage() {
       // Redirect to a different page upon successful login
       // For example, redirect to the dashboard:
       // history.push("/dashboard");
+      setIsLoading(false);
       navigate("/home")
 
     } catch (error) {
