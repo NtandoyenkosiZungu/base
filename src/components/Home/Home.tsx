@@ -71,7 +71,7 @@ const Home: React.FC = () => {
     // Combine all the data into a single object
 
     const allData = {
-        template: localStorage.getItem('template')?.toLowerCase() || "template-two",
+        template: localStorage.getItem('template')?.toLowerCase() || "template-one",
         userDetails: {
             name: name,
             surname: surname,
@@ -94,6 +94,7 @@ const Home: React.FC = () => {
         
     }
     
+    // Effect to check authentication state and set username
     useEffect (() => {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
@@ -105,11 +106,12 @@ const Home: React.FC = () => {
                 setUsername("Guest");
             }
         });
-    }, [])
+    }, []);
 
-
+    // Function to handle the download button click
     const onDownloadButtonClick = () => {
-        //console.log(allData);
+
+        // Set download status to true, signalling the start of the server request
         setDownloadStatus(true);
         fetch(`${apiURL}/download-resume`, {
             method: 'POST',
@@ -138,6 +140,10 @@ const Home: React.FC = () => {
             
             //Set downlaod status to false, signalling completion of the server request
             setDownloadStatus(false);
+            if (window.confirm("Do you want to save your data?")) {
+                saveToLocalStorage();
+                alert("Your data has been saved. You can resume later.");
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -147,7 +153,33 @@ const Home: React.FC = () => {
             setDownloadStatus(false);
         });
     }
-    
+
+    //Function to save all input values to local storage
+    const saveToLocalStorage = () => {
+        localStorage.setItem('template', allData.template);
+        localStorage.setItem('resume-data', JSON.stringify(allData.userDetails));
+    }
+
+
+    // Call saveToLocalStorage to ensure data is saved when the component mounts
+    useEffect(() => {
+        if(localStorage.getItem('resume-data') !== null){
+            const savedData = JSON.parse(localStorage.getItem('resume-data') || '{}');
+            personaldetails.setName(savedData.name || '');
+            personaldetails.setSurname(savedData.surname || '');
+            personaldetails.setAddress(savedData.address || '');
+            personaldetails.setPhone(savedData.phone || '');
+            personaldetails.setEmail(savedData.email || '');
+            personaldetails.setRole(savedData.role || '');
+            personaldetails.setSummary(savedData.summary || '');
+            personaldetails.setLinkedin(savedData.linkedin || '');
+            personaldetails.setGithub(savedData.github || '');
+
+            achievementContext.setAchievementEntries(savedData.achievement || []);
+
+        }
+    }, []);
+
     return (
         <>
             <div className="banner">

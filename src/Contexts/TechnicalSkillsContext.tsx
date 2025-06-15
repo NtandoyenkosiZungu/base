@@ -13,6 +13,7 @@ interface TechnicalSkillsContextProps {
     addTechnicalSkillEntry: () => void;
     updateTechnicalSkillEntry: (index: number, field: keyof TechnicalSkillEntry, value: string) => void;
     removeTechnicalSkillEntry: (index: number) => void;
+    setTechnicalSkillEntries: React.Dispatch<React.SetStateAction<TechnicalSkillEntry[]>>;
 }
 
 export const TechnicalSkillsContext = createContext<TechnicalSkillsContextProps | undefined>(undefined);
@@ -46,7 +47,7 @@ export function TechnicalSkillsContextProvider({ children }: childProp) {
     }
 
     return (
-        <TechnicalSkillsContext.Provider value={{ TechnicalSkillEntries, addTechnicalSkillEntry, updateTechnicalSkillEntry, removeTechnicalSkillEntry }}>
+        <TechnicalSkillsContext.Provider value={{ TechnicalSkillEntries, addTechnicalSkillEntry, updateTechnicalSkillEntry, removeTechnicalSkillEntry, setTechnicalSkillEntries }}>
             {children}
         </TechnicalSkillsContext.Provider>
     )

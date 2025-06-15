@@ -18,6 +18,7 @@ interface funcEducationProps {
     addEducationEntry: ()=> void;
     updateEducationEntry: (index: number, field: keyof EducationEntry, value: string) => void;
     removeEducationEntry: (index: number) => void;
+    setEducationEntries: React.Dispatch<React.SetStateAction<EducationEntry[]>>;
 }
   
 export const EducationFunctionContext = createContext< funcEducationProps | undefined>(undefined);
@@ -57,7 +58,7 @@ export function EducationFunctionContextProvider({children}: childProp){
     }
 
     return (
-        <EducationFunctionContext.Provider value={{ educationEntries, addEducationEntry, updateEducationEntry, removeEducationEntry }}>
+        <EducationFunctionContext.Provider value={{ educationEntries, addEducationEntry, updateEducationEntry, removeEducationEntry, setEducationEntries }}>
             {children}
         </EducationFunctionContext.Provider>
     )

@@ -21,6 +21,7 @@ interface ProjectContextProps {
     removeProjectEntry: (index: number)=> void;
     addTool: (index: number, tool: string)=> void;
     removeTool: (index: number)=> void;
+    setProjectEntries: React.Dispatch<React.SetStateAction<ProjectEntry[]>>;
 }
 
 export const ProjectContext = createContext<ProjectContextProps | undefined>(undefined);
@@ -75,7 +76,7 @@ export function ProjectContextProvider ({children}: childProp) {
     }
 
     return (
-        <ProjectContext.Provider value={{projectEntries, addProjectEntry, updateProjectEntry, removeProjectEntry, addTool, removeTool}}>
+        <ProjectContext.Provider value={{projectEntries, addProjectEntry, updateProjectEntry, removeProjectEntry, addTool, removeTool, setProjectEntries}}>
             {children}
         </ProjectContext.Provider>
     )

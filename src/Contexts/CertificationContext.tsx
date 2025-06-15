@@ -16,6 +16,7 @@ interface achivementContextProps {
     addCertificationEntry: () => void;
     updateCertificationEntry: (index: number, field: keyof CertificationEntry, value: string) => void;
     removeCertificationEntry: (index: number) => void;
+    setCertificationEntries: React.Dispatch<React.SetStateAction<CertificationEntry[]>>;
 }
 
 export const CertificationContext = createContext<achivementContextProps | undefined>(undefined);
@@ -51,7 +52,7 @@ export function CertificationContextProvider({ children }: childProp) {
     };
 
     return (
-        <CertificationContext.Provider value={{ CertificationEntries, addCertificationEntry, updateCertificationEntry, removeCertificationEntry }}>
+        <CertificationContext.Provider value={{ CertificationEntries, addCertificationEntry, updateCertificationEntry, removeCertificationEntry, setCertificationEntries }}>
             {children}
         </CertificationContext.Provider>
     )

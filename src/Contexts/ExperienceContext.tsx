@@ -19,6 +19,7 @@ interface experienceContextProps {
     addExperienceEntry: () => void;
     updateExperienceEntry: (index: number, field: keyof ExperienceEntry, value: string) => void;
     removeExperienceEntry: (index: number) => void;
+    setExperienceEntries: React.Dispatch<React.SetStateAction<ExperienceEntry[]>>;
 }
 
 export const ExperienceContext = createContext< experienceContextProps | undefined>(undefined);
@@ -56,7 +57,7 @@ export function ExperienceContextProvider({ children }: childProp) {
     };
 
     return (
-        <ExperienceContext.Provider value={{ experienceEntries, addExperienceEntry, updateExperienceEntry, removeExperienceEntry }}>
+        <ExperienceContext.Provider value={{ experienceEntries, addExperienceEntry, updateExperienceEntry, removeExperienceEntry, setExperienceEntries }}>
             {children}
         </ExperienceContext.Provider>
     );

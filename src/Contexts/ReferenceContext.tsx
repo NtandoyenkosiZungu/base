@@ -17,6 +17,7 @@ interface ReferenceContextProps  {
     addReferenceEntry: () => void;
     updateReferenceEntry: (index : number, field : keyof ReferenceEntry, value : string ) => void;
     removeReferenceEntry: (index : number) => void;
+    setReferenceEntries: React.Dispatch<React.SetStateAction<ReferenceEntry[]>>;
 }
 
 export const ReferenceContext = createContext<ReferenceContextProps| undefined>(undefined);
@@ -54,7 +55,7 @@ export function ReferenceContextProvider({children}: childProp){
     }
 
     return (
-        <ReferenceContext.Provider value={{referenceEntries, addReferenceEntry, updateReferenceEntry, removeReferenceEntry}}>
+        <ReferenceContext.Provider value={{referenceEntries, addReferenceEntry, updateReferenceEntry, removeReferenceEntry, setReferenceEntries}}>
             {children}
         </ReferenceContext.Provider>
     )

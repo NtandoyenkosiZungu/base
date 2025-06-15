@@ -14,6 +14,7 @@ interface softSkillsProps{
     addSoftSkill: () => void;
     updateSoftSkill: (index:number, field: keyof softSkillEntry, value:string) => void;
     removeSoftSkill: (index:number) =>  void;
+    setSoftSKillEntries: React.Dispatch<React.SetStateAction<softSkillEntry[]>>;
 }
 
 export const SoftSkillContext = createContext<softSkillsProps | undefined>(undefined);
@@ -45,7 +46,7 @@ export function SoftSkillContextProvider({children} : childProp){
     } 
 
     return (
-        <SoftSkillContext.Provider value ={{softSkillEntries, updateSoftSkill, removeSoftSkill, addSoftSkill}}>
+        <SoftSkillContext.Provider value ={{softSkillEntries, updateSoftSkill, removeSoftSkill, addSoftSkill, setSoftSKillEntries}}>
             {children}
         </SoftSkillContext.Provider>
     )

@@ -13,6 +13,7 @@ interface achievementContextProps {
     addAchievementEntry: () => void;
     updateAchievementEntry: (index: number, field: keyof AchievementEntry, value: string) => void;
     removeAchievementEntry: (index: number) => void;
+    setAchievementEntries: React.Dispatch<React.SetStateAction<AchievementEntry[]>>;
 }
 
 export const AchievementContext = createContext<achievementContextProps | undefined>(undefined);
@@ -46,7 +47,7 @@ export function AchievementContextProvider( {children}: childProp) {
     }
 
     return (
-        <AchievementContext.Provider value={{ AchievementEntries, addAchievementEntry, updateAchievementEntry, removeAchievementEntry }}>
+        <AchievementContext.Provider value={{ AchievementEntries, addAchievementEntry, updateAchievementEntry, removeAchievementEntry, setAchievementEntries }}>
             {children}
         </AchievementContext.Provider>
     )
