@@ -140,9 +140,12 @@ const Home: React.FC = () => {
             
             //Set downlaod status to false, signalling completion of the server request
             setDownloadStatus(false);
+
             if (window.confirm("Do you want to save your data?")) {
                 saveToLocalStorage();
                 alert("Your data has been saved. You can resume later.");
+            } else {
+                alert("Your data has not been saved. You can fill it again next time.");
             }
         })
         .catch((error) => {
@@ -156,8 +159,17 @@ const Home: React.FC = () => {
 
     //Function to save all input values to local storage
     const saveToLocalStorage = () => {
+        localStorage.removeItem('resume-data');
+        localStorage.removeItem('template');
+
+        // Save all data to local storage
         localStorage.setItem('template', allData.template);
         localStorage.setItem('resume-data', JSON.stringify(allData.userDetails));
+    }
+
+    const save = () => {
+        saveToLocalStorage();
+        alert("Your data has been saved. You can resume later.");
     }
 
 
@@ -176,6 +188,13 @@ const Home: React.FC = () => {
             personaldetails.setGithub(savedData.github || '');
 
             achievementContext.setAchievementEntries(savedData.achievement || []);
+            educationContext.setEducationEntries(savedData.education || []);
+            experienceContext.setExperienceEntries(savedData.experience || []);
+            projectContext.setProjectEntries(savedData.project || []);
+            certificationContext.setCertificationEntries(savedData.certification || []);
+            referenceContext.setReferenceEntries(savedData.reference || []);
+            technicalSkillContext.setTechnicalSkillEntries(savedData.technicalSkills || []);
+            softSkillContext.setSoftSKillEntries(savedData.softSkills || []);
 
         }
     }, []);
@@ -185,6 +204,10 @@ const Home: React.FC = () => {
             <div className="banner">
                 <h1>HiResume</h1>
                <div className="banner-btns">
+                    <button className="save-btn" onClick={() => save()}>
+                        Save
+                        <img src={icons.save} alt="" />
+                    </button>
                     <button className="download-btn"  onClick={()=> handleOpenGallery()}>
                         Template
                         <img src={icons.res_template} alt="" />
