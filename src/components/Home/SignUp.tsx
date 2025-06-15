@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
 import "../../assets/styles/signup.css"; // Importing the CSS file
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { auth } from "./firebase";  // Firebase import
+import { fetchSignInMethodsForEmail } from "firebase/auth";
 
 interface SignupFormInputs {
   username: string;
@@ -9,6 +13,8 @@ interface SignupFormInputs {
 }
 
 export default function SignupPage() {
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -19,7 +25,18 @@ export default function SignupPage() {
   const navigate = useNavigate();
 
   const onSubmit = async (data: SignupFormInputs) => {
-    console.log(data);
+
+    // Prevent multiple submissions
+    setIsLoading(true);
+
+    //Check if user already exists
+    const existingUser = await fetchSignInMethodsForEmail(auth, data.email);
+    if (existingUser.length > 0) {
+      alert("User already exists with this email. Please try logging in.");
+      setIsLoading(false);
+      return;
+    }
+
     const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL;
     
     try {
@@ -44,10 +61,9 @@ export default function SignupPage() {
             alert(error.message || 'Failed to signup');
             return null;
         }
+    }finally{
+      setIsLoading(false);
     }
-    console.log("Signup Data:", data);
-    // Handle signup logic
-
     
   };
 
@@ -83,7 +99,14 @@ export default function SignupPage() {
             />
             {errors.password && <p className="error-text">{errors.password.message}</p>}
           </div>
-          <button type="submit" className="signup-button">Sign Up</button>
+          <button type="submit" className="signup-button" disabled={isLoading}>
+            {
+              isLoading ? "Signing Up..." : "Sign Up"
+            }
+            {
+              isLoading && <div className="loader"></div>
+            }
+          </button>
         </form>
         <p className="login-text">
           Already have an account? <a onClick={()=> navigate("/login")}>Login</a>

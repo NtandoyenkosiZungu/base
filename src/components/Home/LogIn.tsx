@@ -14,13 +14,18 @@ interface LoginFormInputs {
 }
 
 export default function LoginPage() {
+
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+    
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  const [errorMessage, setErrorMessage] = useState<string>("");
+
 
   const navigate = useNavigate();
   const  {setToken} = useAuth();
@@ -31,7 +36,9 @@ export default function LoginPage() {
     }  
   }) */
   
-  const onSubmit = async (data: LoginFormInputs) => {         
+  const onSubmit = async (data: LoginFormInputs) => {   
+    // Prevent multiple submissions
+    setIsLoading(true);      
     try {
       // Firebase authentication for sign in
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -49,8 +56,9 @@ export default function LoginPage() {
       // Handling login errors
       if (error instanceof Error) {
         setErrorMessage("Invalid email or password");
-        console.error("Login error:", error.message);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,7 +89,10 @@ export default function LoginPage() {
             />
             {errors.password && <p className="error-text">{errors.password.message}</p>}
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? "Logging In..." : "Log In"}
+            {isLoading && <div className="loader"></div>}
+          </button>
         </form>
         <p className="signup-text">
           Don't have an account? <a href="/signup">Sign Up</a>
