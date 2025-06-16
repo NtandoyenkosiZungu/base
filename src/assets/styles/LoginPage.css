@@ -98,7 +98,7 @@
 
 
 /* HTML: <div class="loader"></div> */
-.loader {
+.loader-login {
   height: 12px;
   aspect-ratio: 5;
   -webkit-mask: linear-gradient(90deg,#0000 ,#fff 20% 80%,#0000);

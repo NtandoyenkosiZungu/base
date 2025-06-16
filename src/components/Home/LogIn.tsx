@@ -92,7 +92,7 @@ export default function LoginPage() {
           </div>
           <button type="submit" className="login-button" disabled={isLoading}>
             {isLoading ? "Logging In..." : "Log In"}
-            {isLoading && <div className="loader"></div>}
+            {isLoading && <div className="loader-login"></div>}
           </button>
         </form>
         <p className="signup-text">

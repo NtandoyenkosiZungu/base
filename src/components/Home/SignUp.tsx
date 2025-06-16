@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import "../../assets/styles/signup.css"; // Importing the CSS file
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { auth } from "./firebase";  // Firebase import
 import { fetchSignInMethodsForEmail } from "firebase/auth";
+
+import "../../assets/styles/signup.css"; // Importing the CSS file
 
 interface SignupFormInputs {
   username: string;
@@ -105,7 +106,7 @@ export default function SignupPage() {
               isLoading ? "Signing Up..." : "Sign Up"
             }
             {
-              isLoading && <div className="loader"></div>
+              isLoading && <div className="loader-signup"></div>
             }
           </button>
         </form>
