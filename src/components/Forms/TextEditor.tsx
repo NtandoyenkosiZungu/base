@@ -7,16 +7,18 @@ interface TextEditorProps {
   index: number;
   field: string;
   label: string;
-  setContent: (index: number, field: string, value: string) => void;
+  setContent?: (index: number, field: string, value: string) => void;
 }
 
+
 const TextEditor: React.FC<TextEditorProps> = ({ content, index, field, label, setContent }) => {
+
   const [value, setValue] = useState<string>(content);
   const quillRef = useRef<ReactQuill>(null);
 
   const handleChange = (value: string) => {
     setValue(value);
-    setContent(index, field, value);
+    setContent?.(index, field, value);
   };
 
 

@@ -8,6 +8,7 @@ import { CertificationContextProvider } from "./CertificationContext";
 import { AchievementContextProvider } from "./AchievementContext";
 import { TechnicalSkillsContextProvider } from "./TechnicalSkillsContext";
 import { SoftSkillContextProvider } from "./SoftSkillsContext";
+import { ATSContextProvider } from "./ats/ATSContext";
 
 
 
@@ -29,7 +30,9 @@ export function MainContextProvider({children}: MainProps){
                                    <AchievementContextProvider>
                                         <TechnicalSkillsContextProvider>
                                             <SoftSkillContextProvider>
-                                                {children}
+                                                <ATSContextProvider>
+                                                    {children}
+                                                </ATSContextProvider>
                                             </SoftSkillContextProvider>
                                         </TechnicalSkillsContextProvider>
                                    </AchievementContextProvider>
