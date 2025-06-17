@@ -47,7 +47,7 @@ const DetailForm: React.FC = () => {
         </div>
         { 
           formState && 
-            <div>
+            <div style={{width: "100%"}}>
               <hr />
               <PersonalDetails />
               <hr />
