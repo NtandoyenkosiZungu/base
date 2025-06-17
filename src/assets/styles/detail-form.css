@@ -160,6 +160,7 @@ div.output-form {
     margin-top: 5%;
     margin-left: 50%;
     overflow-y: auto;
+    overflow-x: hidden;
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -176,6 +177,181 @@ div.resume {
     background-color: #FFFBFC;
     padding: 10px;
     border-radius: 5px;
+}
+
+
+.ats-output {
+  background-color: rgba(30, 41, 59, 0.5); /* slate-800/50 */
+  backdrop-filter: blur(12px); /* backdrop-blur-md */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 1.5rem; /* p-6 */
+
+  border: 1px solid #334155; /* border-slate-700 */
+}
+
+/* Responsive padding (lg:p-8) */
+@media (min-width: 1024px) {
+  .custom-card {
+    padding: 2rem; /* p-8 */
+  }
+}
+
+
+
+div.ats-output {
+    width: 100%;
+    min-height: 95%;
+    border-radius: 5px;
+    background-color: #2b072bd4;
+
+    
+    background: linear-gradient(to bottom right, #0f172a, #1e3a8a, #4f46e5);
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+    border-radius: 0.75rem; /* rounded-xl */
+
+    overflow: hidden;
+    word-wrap: break-word;
+
+    font-family: 'Arial', sans-serif;
+
+    font-size: 14px;
+   /* font-weight: 700;*/
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+div.ats-output > * {
+    width: 90%;
+}
+
+div.ats-output > div.title-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+div.title-holder > h1 {
+    font-size: 35px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+div.output-form > div.toggle-switch {
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+    z-index: 100000;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+div.output-form input.output-switch {
+    width: 10px;
+    height: 10px;
+}
+
+div.output-form label.ats-toggle-label {
+    width: 70px;
+    height: 20px;
+    display: block;
+
+    background-color: #ccc;
+    border-radius: 15px;
+    box-shadow: inset 0px 5px 15px rgba(0 , 0, 0, 0.4);
+    cursor: pointer;
+
+
+    transition: transform 0.3s ease;
+}
+
+div.output-form label.ats-toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(0px);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(180deg, #4f46e5, #8b5cf6);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+div.output-form input.output-switch {
+    display: none;
+}
+
+div.output-form input:checked + label.ats-toggle-label {
+    background-color: #4f46e5;
+}
+
+div.output-form input:checked + label.ats-toggle-label::after {
+    left: 0px;
+    transform: translateX(50px);
+}
+
+
+
+/*INPUT FORM TOGGLE SWITCH*/
+div.switch > label {
+    width: 70px;
+    height: 20px;
+    display: block;
+
+    background-color: #ccc;
+    border-radius: 15px;
+    box-shadow: inset 0px 5px 15px rgba(0 , 0, 0, 0.4);
+    cursor: pointer;
+
+    position: relative;
+    transition: background-color 0.3s ease;
+    
+}
+
+div.switch > input{
+    display: none;
+}
+
+div.switch > label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50px;
+    transform: translateX(0px);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(180deg, #4f46e5, #8b5cf6);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+div.switch > input:checked + label {
+    background: linear-gradient(180deg, #8b5cf6, #4f46e5);
+}
+
+div.switch > input:checked + label::after {
+    left: 0px;
+    transform: translateX(50px);
 }
 
 

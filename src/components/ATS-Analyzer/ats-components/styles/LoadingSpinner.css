@@ -1,0 +1,20 @@
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  color: #2563eb; /* Tailwind's blue-600 */
+  animation: spin 1s linear infinite;
+}
+
+.spinner-bg {
+  opacity: 0.25;
+}
+
+.spinner-fg {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

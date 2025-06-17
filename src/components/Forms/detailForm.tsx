@@ -6,6 +6,7 @@ import { TemplateGallery } from '../Extra/TemplateGallery';
 import { ATSComponent } from '../ATS-Analyzer/ATS-Analyzer';
 import { ATSContext } from '../../Contexts/ats/ATSContext';
 import { ResultsDisplay } from '../ATS-Analyzer/ats-components/ResultsDisplay';
+import { LoadingSpinner } from '../ATS-Analyzer/ats-components/LoadingSpinner';
 
 // Lazy load template components
 const TemplateOne = lazy(() => import('../Templates/TemplateOne'));
@@ -34,9 +35,20 @@ const DetailForm: React.FC = () => {
 
   return (
     <div className="detail-form">
+      <div className='input-form'>
+        <div className='switch'>
+          <input
+            type="checkbox"
+            checked={!formState}
+            onChange={(e) => { setFormState(!e.target.checked) }}
+            id='formswitch'
+          />
+          <label htmlFor="formswitch"></label>
+        </div>
         { 
-          formState && (
-            <div className='input-form'>
+          formState && 
+            <div>
+              <hr />
               <PersonalDetails />
               <hr />
               <EducationDetails />
@@ -55,14 +67,35 @@ const DetailForm: React.FC = () => {
               <hr />
               <ReferenceDetails />
             </div>
-          )}
-          {
-            !formState && <div className='input-form'> <ATSComponent /> </div>
           }
+          {
+            !formState && 
+            <div style={{width: "100%"}}> 
+              <ATSComponent/>
+            </div>
+          }
+        </div>
 
 
         <div className='output-form'>
-          {ats.isAvailable && <ResultsDisplay result={ats.analysisResults}/>}
+          <div className='toggle-switch'>
+            <input 
+              id='ats-toggle'
+              className='output-switch'
+              type='checkbox'
+              checked={ats.isAvailable}
+              onChange={(e) => ats.setIsAvailable(e.target.checked)}
+            />
+            <label htmlFor="ats-toggle" className='ats-toggle-label'></label>
+          </div>
+          {ats.isAvailable && 
+            <div className='ats-output'>
+              <div className='title-holder'><h1>Analysis Results</h1></div>
+                <Suspense fallback={<LoadingSpinner/>}> 
+                  <ResultsDisplay result={ats.analysisResults}/>
+                </Suspense>
+            </div>
+          }
           {!ats.isAvailable && 
             <Suspense fallback={<TemplateLoadingFallback />}>
               {template === 'Template-One' ? <TemplateOne /> :

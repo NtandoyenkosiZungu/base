@@ -1,38 +1,36 @@
-
 import React from 'react';
 import { AnalysisResult } from '../types';
 import { CheckCircleIcon, XCircleIcon, LightBulbIcon, StarIcon } from './Icons';
+import './styles/ResultsDisplay.css';
 
 interface ResultsDisplayProps {
   result: AnalysisResult;
 }
 
 const ScoreCircle: React.FC<{ score: number }> = ({ score }) => {
-  const circumference = 2 * Math.PI * 45; // r = 45
+  const circumference = 2 * Math.PI * 45;
   const offset = circumference - (score / 100) * circumference;
-  
-  let strokeColor = "stroke-red-500";
+
+  let strokeColor = "stroke-red";
   if (score >= 75) {
-    strokeColor = "stroke-green-500";
+    strokeColor = "stroke-green";
   } else if (score >= 50) {
-    strokeColor = "stroke-yellow-500";
+    strokeColor = "stroke-yellow";
   }
 
   return (
-    <div className="relative w-40 h-40 mx-auto mb-8">
-      <svg className="w-full h-full" viewBox="0 0 100 100">
-        {/* Background circle */}
+    <div className="score-circle-container">
+      <svg className="score-svg" viewBox="0 0 100 100">
         <circle
-          className="stroke-current text-slate-700"
+          className="circle-bg"
           strokeWidth="10"
           cx="50"
           cy="50"
           r="45"
           fill="transparent"
         />
-        {/* Progress circle */}
         <circle
-          className={`stroke-current ${strokeColor} transform -rotate-90 origin-center transition-all duration-1000 ease-out`}
+          className={`circle-progress ${strokeColor}`}
           strokeWidth="10"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
@@ -43,89 +41,74 @@ const ScoreCircle: React.FC<{ score: number }> = ({ score }) => {
           strokeLinecap="round"
         />
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-4xl font-bold text-slate-100">{score}%</span>
+      <div className="score-label">
+        <span>{score}%</span>
       </div>
     </div>
   );
 };
 
-
-const ResultSection: React.FC<{ title: string; items: string[]; icon: React.ReactNode; itemIcon?: React.ReactNode; itemIconClass?: string; listType?: 'ul' | 'ol' }> = ({ title, items, icon, itemIcon, itemIconClass, listType = 'ul' }) => {
-  if (!items || items.length === 0) {
-    return null; 
-  }
+const ResultSection: React.FC<{
+  title: string;
+  items: string[];
+  icon: React.ReactNode;
+  itemIcon?: React.ReactNode;
+  itemIconClass?: string;
+  listType?: 'ul' | 'ol';
+}> = ({ title, items, icon, itemIcon, itemIconClass = '', listType = 'ul' }) => {
+  if (!items || items.length === 0) return null;
 
   const ListComponent = listType;
 
   return (
-    <div className="bg-slate-700/50 p-6 rounded-lg shadow-lg mb-6 border border-slate-600">
-      <h3 className="text-xl font-semibold text-indigo-400 mb-4 flex items-center">
+    <div className="result-section">
+      <h3 className="result-title">
         {icon}
         {title}
       </h3>
       {items.length > 0 ? (
-        <ListComponent className={`space-y-2 ${listType === 'ol' ? 'list-decimal list-inside' : 'list-none'} text-slate-300`}>
+        <ListComponent className={`result-list ${listType}`}>
           {items.map((item, index) => (
-            <li key={index} className="flex items-start text-sm">
-              {itemIcon && <span className={`mr-2 mt-1 flex-shrink-0 ${itemIconClass}`}>{itemIcon}</span>}
+            <li key={index} className="result-list-item">
+              {itemIcon && <span className={`item-icon ${itemIconClass}`}>{itemIcon}</span>}
               <span>{item}</span>
             </li>
           ))}
         </ListComponent>
       ) : (
-        <p className="text-slate-400 italic text-sm">No specific {title.toLowerCase()} identified.</p>
+        <p className="result-fallback">No specific {title.toLowerCase()} identified.</p>
       )}
     </div>
   );
 };
 
-
 export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result }) => {
   return (
-    <div className="space-y-6 animate-fadeIn">
+    <div className="results-wrapper fade-in">
       <ScoreCircle score={result.matchScore} />
-      
-      <ResultSection 
-        title="Key Strengths" 
-        items={result.strengths}
-        icon={<StarIcon className="w-6 h-6 mr-2 text-yellow-400" />}
-        itemIcon={<CheckCircleIcon className="w-4 h-4" />}
-        itemIconClass="text-green-400"
-      />
-      <ResultSection 
-        title="Missing Keywords & Skills" 
-        items={result.missingKeywords}
-        icon={<XCircleIcon className="w-6 h-6 mr-2 text-red-400" />}
-        itemIcon={<XCircleIcon className="w-4 h-4" />}
-        itemIconClass="text-red-400"
 
+      <ResultSection
+        title="Key Strengths"
+        items={result.strengths}
+        icon={<StarIcon className="icon icon-yellow" />}
+        itemIcon={<CheckCircleIcon className="icon-small" />}
+        itemIconClass="icon-green"
       />
-      <ResultSection 
-        title="Improvement Suggestions" 
+      <ResultSection
+        title="Missing Keywords & Skills"
+        items={result.missingKeywords}
+        icon={<XCircleIcon className="icon icon-red" />}
+        itemIcon={<XCircleIcon className="icon-small" />}
+        itemIconClass="icon-red"
+      />
+      <ResultSection
+        title="Improvement Suggestions"
         items={result.suggestions}
-        icon={<LightBulbIcon className="w-6 h-6 mr-2 text-blue-400" />}
-        itemIcon={<LightBulbIcon className="w-4 h-4" />}
-        itemIconClass="text-blue-400"
+        icon={<LightBulbIcon className="icon icon-blue" />}
+        itemIcon={<LightBulbIcon className="icon-small" />}
+        itemIconClass="icon-blue"
         listType="ol"
       />
     </div>
   );
 };
-
-// Add this to your index.html <style> or a global CSS file if you prefer:
-// <style>
-// @keyframes fadeIn {
-//   from { opacity: 0; transform: translateY(10px); }
-//   to { opacity: 1; transform: translateY(0); }
-// }
-// .animate-fadeIn {
-//   animation: fadeIn 0.5s ease-out forwards;
-// }
-// </style>
-// For Tailwind, you can define this in tailwind.config.js if you have a build step
-// For CDN, inline style or CSS file is the way. Added directly to ResultsDisplay as inline for simplicity for now.
-// For the final solution, let's assume tailwind.config.js would handle custom animations.
-// As we are not using custom tailwind.config.js, I will just apply some basic classes if needed.
-// The component is already structured to fade in by virtue of conditional rendering in App.tsx.
-// A more explicit animation can be added if required, but good conditional rendering usually suffices.
