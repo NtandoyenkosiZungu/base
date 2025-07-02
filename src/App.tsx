@@ -26,7 +26,7 @@ const LoadingFallback = () => (
 );
 
 function App() {
-
+  
   useEffect(() => {
     const defaultTemplate = localStorage.getItem('template') || 'Template-One';
     localStorage.setItem('template', defaultTemplate);
