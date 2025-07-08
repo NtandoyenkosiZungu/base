@@ -161,7 +161,7 @@ interface experienceProps {
 export const Experience : React.FC<experienceProps> =({workplace, role, startDate, endDate, index, description, updateExperience, removeExperience}) => {
   return (
     <DropdownContent2 title={workplace.length > 0? workplace : 'Company'} index={index} removeEntry={removeExperience}>
-      <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px"}}>
+      <div className="dropdown-v2-content">
         <span>
           <label htmlFor="workplace">Workplace</label>
           <input type="text" name="workplace" id="workplace" value={workplace} onChange={(e)=> updateExperience(index, 'workplace', e.target.value)}/>
@@ -209,7 +209,7 @@ export const Project : React.FC<ProjectProps> = ({project, link, description, in
 
   return (
     <DropdownContent2 title={project.length > 0? project : 'Project Name'} index={index} removeEntry={removeProjectEntry}>
-      <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px"}}>
+      <div className="dropdown-v2-content">
         <span>
           <label htmlFor="project-name">Project Name</label>
           <input type="text" name="project-name" id="project-name" value={project} onChange={(e)=> updateProjectEntry(index, 'project', e.target.value)}/>

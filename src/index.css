@@ -3,6 +3,10 @@ a {
     text-decoration: none;
 }
 
+button {
+  overflow: hidden;
+}
+
 a:hover{
     text-decoration: underline;
 }
