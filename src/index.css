@@ -17,6 +17,18 @@ body{
   overflow: hidden;
 }
 
+
+@media (max-width: 800px) {
+  body{
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    scroll-behavior: smooth;
+  }
+}
 /* Style for WebKit-based browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
     width: 12px; /* Width of the vertical scrollbar */

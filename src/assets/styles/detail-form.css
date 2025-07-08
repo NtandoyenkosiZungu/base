@@ -21,7 +21,7 @@ div.input-form {
     background-color: #FFFBFC;
     position: fixed;
     top: 0;
-    margin-top: 5%;
+    margin-top: 70px;
     margin-left: 5%;
     overflow-y: auto;
 
@@ -32,13 +32,6 @@ div.input-form {
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    div.input-form {
-        width: 90%;
-        margin-left: 5%;
-    }
 }
 
 div.dropdown {
@@ -157,20 +150,13 @@ div.output-form {
     background-color: gray;
     position: fixed;
     top: 0;
-    margin-top: 5%;
+    margin-top: 70px;
     margin-left: 50%;
     overflow-y: auto;
     overflow-x: hidden;
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    div.output-form {
-        width: 90%;
-        margin: 5% auto;
-    }
 }
 
 div.resume {
@@ -455,4 +441,28 @@ div.switch > input:checked + label::after {
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
+}
+
+
+
+
+
+
+@media (max-width: 800px) {
+    div.input-form {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 20px;
+
+        position: relative;
+    }
+
+    
+    div.output-form {
+        width: 90%;
+        margin: 5%;
+        margin-top: 20px;
+
+        position: relative;
+    }
 }

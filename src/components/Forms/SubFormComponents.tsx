@@ -1,4 +1,4 @@
-import {useState, useRef } from "react";
+import {useState, useRef, useCallback } from "react";
 import { EducationEntry } from "../../Contexts/EducationContext";
 import { ExperienceEntry } from "../../Contexts/ExperienceContext";
 import { ProjectEntry } from "../../Contexts/ProjectContext";
@@ -68,7 +68,7 @@ export const DropdownContent2: React.FC<DropdownContentProps> = ({ title, childr
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
 
-  const toggleDropdown = () => {
+  const toggleDropdown =() => {
     setIsOpen(!isOpen);
   };
 
