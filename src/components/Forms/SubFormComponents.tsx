@@ -1,4 +1,4 @@
-import {useState, useRef, useCallback } from "react";
+import {useState, useRef } from "react";
 import { EducationEntry } from "../../Contexts/EducationContext";
 import { ExperienceEntry } from "../../Contexts/ExperienceContext";
 import { ProjectEntry } from "../../Contexts/ProjectContext";
