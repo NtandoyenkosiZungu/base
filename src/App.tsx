@@ -37,19 +37,34 @@ function App() {
     <AuthContextProvider>
       <TemplateGalleryProvider>
         <Router>
-          <Suspense fallback={<LoadingFallback />}>
             <Routes>
               {/* Route for the login page */}
-              <Route path="/" element={<LoginPage />} />
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/signup' element={<SignupPage />} />
+              <Route path="/" element={
+                <Suspense fallback={<LoadingFallback/>} >
+                  <LoginPage />
+                </Suspense>
+              } />
+
+              <Route path='/login' element={
+                <Suspense fallback={<LoadingFallback/>}>
+                  <LoginPage/>
+                </Suspense>
+              } />
+              <Route path='/signup' element={
+                <Suspense fallback={<LoadingFallback/>}>
+                  <SignupPage/>
+                </Suspense>
+              } />
               
               {/* Route for the home page */}
               <Route element={<PrivateRoutes />}>
-                <Route path="/home" element={<Home />} />
+                <Route path="/home" element={
+                <Suspense fallback={<LoadingFallback/>}>
+                  <Home/>
+                </Suspense>
+                } />
               </Route>
             </Routes>
-          </Suspense>
         </Router>
       </TemplateGalleryProvider>
     </AuthContextProvider>
