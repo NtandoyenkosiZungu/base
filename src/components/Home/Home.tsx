@@ -1,9 +1,8 @@
-import DetailForm from "../Forms/detailForm"
 import '../../assets/styles/home.css'
 
 import { getAuth, onAuthStateChanged } from "firebase/auth/cordova";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { TemplateGalleryContext } from "../../Contexts/templateGalleryContext"
 import { PersonalDetailsContext } from "../../Contexts/PersonalDetailsContext";
 import { EducationFunctionContext } from "../../Contexts/EducationContext";
@@ -15,8 +14,11 @@ import { ReferenceContext } from "../../Contexts/ReferenceContext";
 import { TechnicalSkillsContext } from "../../Contexts/TechnicalSkillsContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
 import { icons } from "../Extra/icons";
+import { LoadingFallback } from '../Extra/LoadingFallback';
+import { MainContextProvider } from '../../Contexts/MainFunctionContext';
 
 
+const DetailForm = lazy(() => import('../Forms/detailForm'))
 
 const Home: React.FC = () => {
 
@@ -33,39 +35,66 @@ const Home: React.FC = () => {
     }
 
     const personaldetails = useContext(PersonalDetailsContext);
-    if (!personaldetails) return null;
+    if (!personaldetails) {
+        console.log("Something went wrong when loading Personal Details Context");
+        return null;
+    };
     const { name, surname, address, phone, email, role, summary, linkedin, github } = personaldetails;
 
     const educationContext = useContext(EducationFunctionContext);
-    if (!educationContext) return null;
+    if (!educationContext) {
+        console.log("Something went wrong when loading Education Context");
+        return null;
+    }
     const {educationEntries} = educationContext;
 
     const experienceContext = useContext(ExperienceContext);
-    if (!experienceContext) return null;
+    if (!experienceContext) {
+        console.log("Something went wrong when loading Experience Context");
+        return null;
+    }
     const { experienceEntries } = experienceContext;
 
     const projectContext = useContext(ProjectContext);
-    if (!projectContext) return null;
+    if (!projectContext) {
+        console.log("Something went wrong when loading Project Context");
+        return null;
+    }
     const { projectEntries } = projectContext;
 
     const certificationContext = useContext(CertificationContext);
-    if (!certificationContext) return null;
+    if (!certificationContext) {
+        console.log("Something went wrong when loading Certification Context");
+        return null;
+    }
     const { CertificationEntries } = certificationContext;
 
     const referenceContext = useContext(ReferenceContext);
-    if (!referenceContext) return null;
+    if (!referenceContext) {
+        console.log("Something went wrong when loading Reference Context");
+        return null;
+    }
     const { referenceEntries } = referenceContext;
 
     const technicalSkillContext = useContext(TechnicalSkillsContext);
-    if (!technicalSkillContext) return null;
+    if (!technicalSkillContext) {
+        console.log("Something went wrong when loading Technical Skills Context");
+        return null;
+    }
     const { TechnicalSkillEntries } = technicalSkillContext;
 
     const achievementContext = useContext(AchievementContext);
-    if (!achievementContext) return null;
+    if (!achievementContext) {
+        console.log("Something went wrong when loading Achievement Context");
+        return null;
+    }
     const { AchievementEntries } = achievementContext;
 
     const softSkillContext = useContext(SoftSkillContext);
-    if (!softSkillContext) return null;
+    if (!softSkillContext) {
+        console.log("Something went wrong when loading Soft Skills Context");
+        return null;
+    }
     const {softSkillEntries} = softSkillContext;
 
     // Combine all the data into a single object
@@ -226,9 +255,12 @@ const Home: React.FC = () => {
                </div>
                
             </div>
-            <DetailForm/>
+            <Suspense fallback = {<LoadingFallback/>}>
+                <DetailForm/>
+            </Suspense>
         </>
     )
 }
+
 
 export default Home;

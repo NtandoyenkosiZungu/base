@@ -3,27 +3,14 @@ import { Suspense, lazy, useEffect } from 'react';
 import './App.css';
 import { PrivateRoutes } from './components/Home/ProtectedRoute';
 import { AuthContextProvider } from './Contexts/auth/AuthContext';
-import { TemplateGalleryProvider } from './Contexts/templateGalleryContext';
 import { MainContextProvider } from './Contexts/MainFunctionContext';
+
+import { LoadingFallback } from './components/Extra/LoadingFallback';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home/Home'));
 const LoginPage = lazy(() => import('./components/Home/LogIn'));
 const SignupPage = lazy(() => import('./components/Home/SignUp'));
-
-// Loading fallback component
-const LoadingFallback = () => (
-  <div style={{ 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    height: '100vh',
-    fontSize: '1.2rem',
-    color: '#666'
-  }}>
-    Loading...
-  </div>
-);
 
 function App() {
   
@@ -33,9 +20,8 @@ function App() {
   }, []);
 
   return (
-    <MainContextProvider>
+    <>
     <AuthContextProvider>
-      <TemplateGalleryProvider>
         <Router>
             <Routes>
               {/* Route for the login page */}
@@ -60,15 +46,16 @@ function App() {
               <Route element={<PrivateRoutes />}>
                 <Route path="/home" element={
                 <Suspense fallback={<LoadingFallback/>}>
-                  <Home/>
+                  <MainContextProvider>
+                    <Home/>
+                  </MainContextProvider>
                 </Suspense>
                 } />
               </Route>
             </Routes>
         </Router>
-      </TemplateGalleryProvider>
     </AuthContextProvider>
-    </MainContextProvider>
+    </>
   );
 }
 
