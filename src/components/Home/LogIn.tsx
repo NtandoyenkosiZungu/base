@@ -30,11 +30,11 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const  {setToken} = useAuth();
 
-  /*useEffect (() => {
+  useEffect (() => {
     if (localStorage.getItem("authToken")){
       navigate("/home")
     }  
-  }, []) */
+  }, []);
   
   const onSubmit = async (data: LoginFormInputs) => {   
     // Prevent multiple submissions
