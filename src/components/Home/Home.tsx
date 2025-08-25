@@ -15,7 +15,7 @@ import { TechnicalSkillsContext } from "../../Contexts/TechnicalSkillsContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
 import { icons } from "../Extra/icons";
 import { LoadingFallback } from '../Extra/LoadingFallback';
-import { MainContextProvider } from '../../Contexts/MainFunctionContext';
+//import { MainContextProvider } from '../../Contexts/MainFunctionContext';
 
 
 const DetailForm = lazy(() => import('../Forms/detailForm'))
@@ -233,27 +233,30 @@ const Home: React.FC = () => {
                 <h1>HiResume</h1>
                <div className="banner-btns">
                     <button className="save-btn" onClick={() => save()}>
-                        Save
+                        <p>Save</p>
                         <img src={icons.save} alt="" />
                     </button>
                     <button className="download-btn"  onClick={()=> handleOpenGallery()}>
-                        Template
+                        <p>Template</p>
                         <img src={icons.res_template} alt="" />
                     </button>
                     <button onClick={onDownloadButtonClick} className="download-btn" disabled = {downloadStatus}>
                         {
-                            downloadStatus == false ? "Download" : "Downloading"
+                            downloadStatus == false ? <p>Download</p> : <p>Downloading</p>
                         }
                         {
                             downloadStatus == false ?<img src={icons.download} alt="" /> :  <div className="loader"></div>
                         }
                     </button>
                     <button className="account-info">
-                        {username}
+                        <p>{username}</p>
                         <img src={icons.account} alt="" />
                     </button>
                </div>
                
+            </div>
+            <div className='mobile-banner'>
+                <h1>HiResume</h1>
             </div>
             <Suspense fallback = {<LoadingFallback/>}>
                 <DetailForm/>

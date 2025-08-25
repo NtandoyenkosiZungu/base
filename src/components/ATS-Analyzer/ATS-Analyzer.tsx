@@ -61,7 +61,35 @@ export const JobDescriptionInput: React.FC = () => {
         const reference = useContext(ReferenceContext);
         if (!reference) return null;
 
-    const handleAnalyzeClick = async() => {
+        const makeRequest = async() => {
+            setIsLoading(true);
+            fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer <OPENROUTER_API_KEY>",
+                    "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
+                    "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "model": "z-ai/glm-4.5-air:free",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "What is the meaning of life?"
+                        }
+                    ]
+                })
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error.message);
+            });
+            setIsLoading(false);
+
+        }
+        
+        /*const handleAnalyzeClick = async() => {
         
         try {
             setIsLoading(true);
@@ -143,6 +171,8 @@ return `${cleanText(entry.achievement)}`
 }
 `;
 
+
+
     const response = await analyzeResume(resumeText, description)
     ats.setResult(response);
     ats.setIsAvailable(true);
@@ -155,7 +185,7 @@ return `${cleanText(entry.achievement)}`
     setIsLoading(false);
 }
         
-    }
+        } */
 
     return (
     <Dropdown title="Job Description">
@@ -168,7 +198,7 @@ return `${cleanText(entry.achievement)}`
                 />
             </span>
         </div>
-        <button className="analyze-btn" disabled={isLoading} onClick={() => handleAnalyzeClick()}>
+        <button className="analyze-btn" disabled={isLoading} onClick={() => makeRequest()}>
            {isLoading? "Analysing " : "Analyze"}
            {isLoading && <div className="analyze-loader"></div>}
         </button>

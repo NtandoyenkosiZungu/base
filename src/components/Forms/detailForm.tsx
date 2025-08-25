@@ -21,7 +21,7 @@ const TemplateLoadingFallback = () => (
 );
 
 const DetailForm: React.FC = () => {
-  const [formState, setFormState] = useState<boolean>(false); // State to toggle between input form and ATS component
+  const [formState, setFormState] = useState<boolean>(true); // State to toggle between input form and ATS component
 
   const ats = useContext(ATSContext);
   if (!ats) return null;

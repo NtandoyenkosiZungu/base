@@ -14,7 +14,9 @@ div.banner {
     color: #FFFBFC;
 }
 
-
+div.mobile-banner {
+    display: none;
+}
 
 .banner {
     margin-bottom: 20px;
@@ -135,7 +137,63 @@ div.banner {
 
 
 @media (max-width: 800px) {
-    div.banner {
+    div.mobile-banner {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: #0C0C0D;
+        color: #FFFBFC;
+        z-index: 100000000;
+    }
+
+    .mobile-banner h1 {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0;
+        padding: 10px 0;
+        padding-left: 10px;
+    }
+
+    div.banner{
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 15%;
+        right: 10%;
+        transform: translateX(-50%, -50%);
+        width: 80%;
+
+        border-radius: 20px;
+        padding: 5px;
+    }
+    
+    .banner h1 {
         display: none;
+    }
+
+    .banner-btns {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centers both horizontally & vertically */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 50px;
+    }
+
+
+    .banner-btns > button > p {
+        display: none;
+    }
+
+    .banner-btns > button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+
+        box-shadow: none;
     }
 }

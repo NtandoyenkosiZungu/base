@@ -11,6 +11,7 @@ import { LoadingFallback } from './components/Extra/LoadingFallback';
 const Home = lazy(() => import('./components/Home/Home'));
 const LoginPage = lazy(() => import('./components/Home/LogIn'));
 const SignupPage = lazy(() => import('./components/Home/SignUp'));
+const HeroSection = lazy(() => import('./components/pages/HeroSection'));
 
 function App() {
   
@@ -21,16 +22,20 @@ function App() {
 
   return (
     <>
+
+
     <AuthContextProvider>
         <Router>
             <Routes>
-              {/* Route for the login page */}
-              <Route path="/" element={
-                <Suspense fallback={<LoadingFallback/>} >
-                  <LoginPage />
-                </Suspense>
-              } />
+              {/* Route For Hero Section */}
 
+            <Route path='/' element={
+              <Suspense fallback={<LoadingFallback />}>
+                <HeroSection />
+              </Suspense>
+            } />
+              
+             {/* Route for the login page */}
               <Route path='/login' element={
                 <Suspense fallback={<LoadingFallback/>}>
                   <LoginPage/>
