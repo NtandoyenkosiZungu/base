@@ -10,7 +10,7 @@ import { CertificationContext } from "../../Contexts/CertificationContext";
 import { ReferenceContext } from "../../Contexts/ReferenceContext";
 import { SoftSkillContext } from "../../Contexts/SoftSkillsContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
-import { analyzeResume } from "./services/geminiService";
+//import { analyzeResume } from "./services/geminiService";
 import { ATSContext } from "../../Contexts/ats/ATSContext";
 
 export const ATSComponent: React.FC = () => {
@@ -20,11 +20,11 @@ export const ATSComponent: React.FC = () => {
 }
 
 
-const cleanText = (text: string): string => {
+/*const cleanText = (text: string): string => {
     const regularExpression = /<\/?(br|p|ul|ol|li|strong)\b[^>]*>/gi;
     let cleantext = text.replace(regularExpression, '');
     return cleantext;
-}
+}*/
 
 export const JobDescriptionInput: React.FC = () => {
     const [description, setDescription] = useState<string>("");
