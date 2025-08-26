@@ -6,6 +6,7 @@ import { AuthContextProvider } from './Contexts/auth/AuthContext';
 import { MainContextProvider } from './Contexts/MainFunctionContext';
 
 import { LoadingFallback } from './components/Extra/LoadingFallback';
+import { StateSwitchContextProvider } from './Contexts/SwitchContext';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home/Home'));
@@ -52,7 +53,9 @@ function App() {
                 <Route path="/home" element={
                 <Suspense fallback={<LoadingFallback/>}>
                   <MainContextProvider>
-                    <Home/>
+                    <StateSwitchContextProvider>
+                      <Home/>
+                    </StateSwitchContextProvider>
                   </MainContextProvider>
                 </Suspense>
                 } />

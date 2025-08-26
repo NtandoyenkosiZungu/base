@@ -52,7 +52,7 @@ div.mobile-banner {
 
 }
 
-.download-btn, .account-info, .save-btn {
+.download-btn, .account-info, .save-btn, .form-switch {
 
     height: 40px;
     width: 20%;
@@ -111,6 +111,13 @@ div.mobile-banner {
     height: 30px;
 }
 
+.form-switch img{
+    width: 30px;
+    height: 30px;
+}
+
+.form-switch {display: none;}
+
 
 /* HTML: <div class="loader"></div> */
 .loader {
@@ -168,6 +175,7 @@ div.mobile-banner {
 
         border-radius: 20px;
         padding: 5px;
+
     }
     
     .banner h1 {
@@ -196,4 +204,7 @@ div.mobile-banner {
 
         box-shadow: none;
     }
+
+    .form-switch {display: flex;}
+    .account-info {display: none;}
 }

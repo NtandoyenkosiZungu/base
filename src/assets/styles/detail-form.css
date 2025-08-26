@@ -2,6 +2,16 @@
     INPUT FORM STYLES
 */
 
+
+#summary {
+    border-radius: 5px;
+    padding: 5%;
+    font-size: 16px;
+    width: 200%;
+    resize: none;
+    /*style={{borderRadius: '5px', fontSize: "16px", paddingLeft: "5%", paddingRight: "5%"}}*/
+}
+
 button.btn-add-entry {
     width: 75%;
     align-self: center;
@@ -13,7 +23,7 @@ button.btn-add-entry:hover {
     background-color: #d3d3d3;
 }
 
-div.input-form {
+div.input-form, div.in-none-display {
     padding: 10px;
     width: 40%;
     max-height: 85%;
@@ -148,7 +158,7 @@ div.input-form span {
     OUTPUT FORM STYLES
 */
 
-div.output-form {
+div.output-form, div.out-none-display {
     padding: 10px;
     width: 45%;
     height: 85%;
@@ -455,10 +465,19 @@ div.switch > input:checked + label::after {
 
 
 @media (max-width: 800px) {
-    div.input-form {
+    #summary {
         width: 90%;
-        margin-left: 5%;
-        margin-top: 20px;
+    }
+
+    div.in-none-display, div.out-none-display {
+        display: none;
+    }
+
+    div.input-form {
+        width: 450px;
+        height: 580px;
+        margin-left: 0;
+        margin-top: 65px;
 
         position: relative;
     }
@@ -475,9 +494,10 @@ div.switch > input:checked + label::after {
 
     
     div.output-form {
-        width: 90%;
-        margin: 5%;
-        margin-top: 20px;
+        width: 450px;
+        height: 580px;
+        margin: 0;
+        margin-top: 65px;
 
         position: relative;
     }

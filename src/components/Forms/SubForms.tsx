@@ -97,7 +97,7 @@ export const PersonalDetails: React.FC = () => {
           </span>
           <div>
             <label htmlFor="summary">Summary</label>
-            <textarea name="summary" id="summary" style={{width: "195%", borderRadius: '5px', fontSize: "16px", paddingLeft: "5%", paddingRight: "5%"}} rows={5} value={summary} onChange={(e)=> setSummary(e.target.value)}></textarea>
+            <textarea name="summary" id="summary" rows={5} value={summary} onChange={(e)=> setSummary(e.target.value)}></textarea>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ import { TechnicalSkillsContext } from "../../Contexts/TechnicalSkillsContext";
 import { AchievementContext } from "../../Contexts/AchievementContext";
 import { icons } from "../Extra/icons";
 import { LoadingFallback } from '../Extra/LoadingFallback';
+import { useStateSwitch } from '../../Contexts/SwitchContext';
 //import { MainContextProvider } from '../../Contexts/MainFunctionContext';
 
 
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
     const apiURL = import.meta.env.VITE_APP_API_SIGNUP_URL
     const [downloadStatus, setDownloadStatus] = useState<boolean>(false);
     const [username, setUsername] = useState<string>("username");
+    const {stateSwitch, setStateSwitch} = useStateSwitch();
 
     const templateGalleryContext = useContext(TemplateGalleryContext)
     if (!templateGalleryContext) return null;
@@ -202,6 +204,7 @@ const Home: React.FC = () => {
 
 
     // Call saveToLocalStorage to ensure data is saved when the component mounts
+    /*
     useEffect(() => {
         if(localStorage.getItem('resume-data') !== null){
             const savedData = JSON.parse(localStorage.getItem('resume-data') || '{}');
@@ -225,7 +228,7 @@ const Home: React.FC = () => {
             softSkillContext.setSoftSKillEntries(savedData.softSkills || []);
 
         }
-    }, []);
+    }, []); */
 
     return (
         <>
@@ -250,7 +253,10 @@ const Home: React.FC = () => {
                     </button>
                     <button className="account-info">
                         <p>{username}</p>
-                        <img src={icons.account} alt="" />
+                        <img src={icons.account} alt="account-info" />
+                    </button>
+                    <button className='form-switch' onClick={()=> setStateSwitch(!stateSwitch)}>
+                        <img src={icons.switch} alt="form-switch" />
                     </button>
                </div>
                
