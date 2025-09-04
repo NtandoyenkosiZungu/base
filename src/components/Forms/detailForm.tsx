@@ -29,7 +29,7 @@ const DetailForm: React.FC = () => {
   // Set default template if not already set 
 
   return (
-    <div className="detail-form">
+    <>
       <div className={!stateSwitch ? 'input-form' : 'in-none-display'}>
         <div style={{ width: "100%" }}>
           <hr />
@@ -67,7 +67,7 @@ const DetailForm: React.FC = () => {
       <div>
         <TemplateGallery />
       </div>
-    </div>
+    </>
   );
 }
 
